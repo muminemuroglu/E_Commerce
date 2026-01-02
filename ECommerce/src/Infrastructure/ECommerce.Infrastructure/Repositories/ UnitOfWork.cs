@@ -54,10 +54,3 @@ public class UnitOfWork : IUnitOfWork
         GC.SuppressFinalize(this);
     }
 }
-
-/*2. UnitOfWork (Gerçek İşçi)
-Nerede: Infrastructure katmanında. Görevi: IUnitOfWork planına sadık kalarak gerçek işi yapar.
- AppDbContext'i (yani veritabanı bağlantısını) sadece bu dosya tanır.
-
-Neden gerekli? Veritabanına fiziksel olarak dokunan, SaveChangesAsync komutunu gerçekten SQL'e 
-gönderen yer burasıdır.*/

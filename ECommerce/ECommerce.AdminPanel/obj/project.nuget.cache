@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IT0pX1wzih8=",
+  "dgSpecHash": "oTWFS2XVB5g=",
   "success": true,
-  "projectFilePath": "/Users/muminemuroglu/Documents/ECommerce/ECommerce.AdminPanel/ECommerce.AdminPanel.csproj",
+  "projectFilePath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/ECommerce.AdminPanel.csproj",
   "expectedPackageFiles": [
     "/Users/muminemuroglu/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/muminemuroglu/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

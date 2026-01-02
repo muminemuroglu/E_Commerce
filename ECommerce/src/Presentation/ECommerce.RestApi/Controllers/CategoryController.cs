@@ -8,7 +8,7 @@ namespace ECommerce.RestApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[ApiKey] // Her istekte X-Api-Key zorunlu
+//[ApiKey] // Her istekte X-Api-Key zorunlu
 [Authorize] // Her istekte geçerli JWT Token zorunlu
 public class CategoryController : ControllerBase
 {
@@ -42,7 +42,7 @@ public class CategoryController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("Update{id}")]
+    [HttpPost("Update/{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(Guid id, CategoryUpdateDto dto)
     {

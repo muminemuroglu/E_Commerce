@@ -4,7 +4,7 @@ using ECommerce.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace ECommerce.Infrastructure.Repositories;  // Buraya Product'a özel (Join'li sorgular vb.) metodlar gelecek.
+namespace ECommerce.Infrastructure.Repositories;  // Buraya Product'a özel (Join'li sorgular vb.) metodlar geliyor.
 
 public class ProductRepository : GenericRepository<Product>, IProductRepository
 {
@@ -14,12 +14,16 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Product>> GetAllWithCategoryAsync()
-
+    // Repository içindeki örnek sorgu
+    public async Task<IEnumerable<Product>> GetAllWithCategoryAndBrandAsync()
     {
         return await _context.Products
-            .Include(p => p.Category) // Category tablosunu bağla
-            .Where(c => !c.IsDeleted)
+            .Include(p => p.Category) // Kategori bilgilerini bağla
+            .Include(p => p.Brand)    // Marka bilgilerini bağla
+            .Include(p => p.Company) // Şirket bilgilerini bağla
+            .Where(p => !p.IsDeleted) // Eğer Soft Delete kullanıyorsan
             .ToListAsync();
     }
+
+    
 }

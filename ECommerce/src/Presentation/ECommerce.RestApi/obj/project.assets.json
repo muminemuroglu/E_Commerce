@@ -5050,11 +5050,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/muminemuroglu/Documents/ECommerce/src/Presentation/ECommerce.RestApi/ECommerce.RestApi.csproj",
+      "projectUniqueName": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/ECommerce.RestApi.csproj",
       "projectName": "ECommerce.RestApi",
-      "projectPath": "/Users/muminemuroglu/Documents/ECommerce/src/Presentation/ECommerce.RestApi/ECommerce.RestApi.csproj",
+      "projectPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/ECommerce.RestApi.csproj",
       "packagesPath": "/Users/muminemuroglu/.nuget/packages/",
-      "outputPath": "/Users/muminemuroglu/Documents/ECommerce/src/Presentation/ECommerce.RestApi/obj/",
+      "outputPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/muminemuroglu/.nuget/NuGet/NuGet.Config"
@@ -5069,11 +5069,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/muminemuroglu/Documents/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj": {
-              "projectPath": "/Users/muminemuroglu/Documents/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj"
+            "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj": {
+              "projectPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj"
             },
-            "/Users/muminemuroglu/Documents/ECommerce/src/Infrastructure/ECommerce.Infrastructure/ECommerce.Infrastructure.csproj": {
-              "projectPath": "/Users/muminemuroglu/Documents/ECommerce/src/Infrastructure/ECommerce.Infrastructure/ECommerce.Infrastructure.csproj"
+            "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Infrastructure/ECommerce.Infrastructure/ECommerce.Infrastructure.csproj": {
+              "projectPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Infrastructure/ECommerce.Infrastructure/ECommerce.Infrastructure.csproj"
             }
           }
         }

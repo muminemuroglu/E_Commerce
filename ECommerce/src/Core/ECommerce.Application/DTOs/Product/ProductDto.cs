@@ -1,15 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Application.DTOs.Product;
+
 public class ProductDto
 {
     public Guid Id { get; set; }
 
     [Required(ErrorMessage = "Ürün adı zorunludur.")]
+    [MaxLength(150)]
     public string Name { get; set; } = string.Empty;    
     // Rich Text HTML
     [Required(ErrorMessage = "Ürün açıklaması zorunludur.")]
-
     [MaxLength(200, ErrorMessage = "Açıklama en fazla 200 karakter olabilir.")]
     public string Description { get; set; } = string.Empty;
 
@@ -29,4 +30,5 @@ public class ProductDto
 
      [Required(ErrorMessage = "Marka seçimi zorunludur.")]
     public string BrandName { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
 }

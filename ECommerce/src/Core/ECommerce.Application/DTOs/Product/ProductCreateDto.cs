@@ -24,9 +24,8 @@ public class ProductCreateDto
 
     [Required(ErrorMessage = "Şirket ID zorunludur.")]
     public Guid CompanyId { get; set; }
-    
+
     [Required(ErrorMessage = "Marka ID zorunludur.")]
     public Guid BrandId { get; set; }
-    
     public string? ImageUrl { get; set; }
 }

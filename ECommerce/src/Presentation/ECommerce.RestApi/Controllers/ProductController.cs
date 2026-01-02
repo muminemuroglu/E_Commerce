@@ -8,7 +8,6 @@ namespace ECommerce.RestApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -34,16 +33,15 @@ public class ProductController : ControllerBase
         return result.Success ? Ok(result) : NotFound(result);
     }
 
-
     [HttpGet("Search")]
     [AllowAnonymous] // Arama yapmak için giriş zorunluluğu olmasın
     public async Task<IActionResult> Search([FromQuery] string keyword)
     {
-    var result = await _productService.SearchAsync(keyword);
-    return Ok(result);
+        var result = await _productService.SearchAsync(keyword);
+        return Ok(result);
     }
 
-    [HttpGet("Company/{companyId}")]
+    [HttpGet("List/{companyId}")]
     [Authorize(Policy = "CompanyIsolation")] // Şirket bazlı koruma
     public async Task<IActionResult> GetByCompany(Guid companyId)
     {
@@ -53,7 +51,7 @@ public class ProductController : ControllerBase
 
     [HttpPost("Create")]
     [Authorize(Roles = "Admin")] // Sadece Admin ürün ekleyebilir
-    [ApiKey] // X-Api-Key Header kontrolü
+    //[ApiKey] // X-Api-Key Header kontrolü
     public async Task<IActionResult> Create(ProductCreateDto dto)
     {
         var result = await _productService.CreateAsync(dto);
@@ -73,7 +71,7 @@ public class ProductController : ControllerBase
     [HttpDelete("Delete/{id}")]
     [Authorize(Roles = "Admin")]
     [Authorize(Policy = "CompanyIsolation")]
-    [ApiKey] // X-Api-Key Header kontrolü
+    [ApiKey]
     public async Task<IActionResult> Delete(Guid id)
     {
         var result = await _productService.DeleteAsync(id);

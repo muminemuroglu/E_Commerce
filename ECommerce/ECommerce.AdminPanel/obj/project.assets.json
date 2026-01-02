@@ -716,11 +716,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/muminemuroglu/Documents/ECommerce/ECommerce.AdminPanel/ECommerce.AdminPanel.csproj",
+      "projectUniqueName": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/ECommerce.AdminPanel.csproj",
       "projectName": "ECommerce.AdminPanel",
-      "projectPath": "/Users/muminemuroglu/Documents/ECommerce/ECommerce.AdminPanel/ECommerce.AdminPanel.csproj",
+      "projectPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/ECommerce.AdminPanel.csproj",
       "packagesPath": "/Users/muminemuroglu/.nuget/packages/",
-      "outputPath": "/Users/muminemuroglu/Documents/ECommerce/ECommerce.AdminPanel/obj/",
+      "outputPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/muminemuroglu/.nuget/NuGet/NuGet.Config"
@@ -735,8 +735,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/muminemuroglu/Documents/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj": {
-              "projectPath": "/Users/muminemuroglu/Documents/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj"
+            "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj": {
+              "projectPath": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Core/ECommerce.Application/ECommerce.Application.csproj"
             }
           }
         }

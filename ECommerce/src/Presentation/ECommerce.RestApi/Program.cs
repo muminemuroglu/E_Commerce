@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins(
-                "http://localhost:4000", // Angular
+                //"http://localhost:4000", // Angular
                 "http://localhost:5174"  // MVC Admin
             )
             .AllowAnyHeader()
