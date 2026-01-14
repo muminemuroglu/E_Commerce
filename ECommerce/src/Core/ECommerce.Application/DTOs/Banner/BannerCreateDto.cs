@@ -14,6 +14,8 @@ namespace ECommerce.Application.DTOs.Banner;
         [Range(0, int.MaxValue)]
         public int Order { get; set; }
 
+        public bool Status { get; set; }
+
         [Required]
         public Guid CompanyId { get; set; }
     }

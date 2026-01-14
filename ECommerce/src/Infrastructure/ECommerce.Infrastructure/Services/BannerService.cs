@@ -18,12 +18,24 @@ public class BannerService : IBannerService
         _mapper = mapper;
     }
 
-    public async Task<ApiResponse<IEnumerable<BannerDto>>> GetAllAsync()
+   public async Task<ApiResponse<IEnumerable<BannerDto>>> GetAllAsync(Guid? companyId, string role)
+{
+    IEnumerable<Banner> banners;
+
+    if (role == "Admin")
     {
-        var banners = await _unitOfWork.Banners.GetAllAsync();
-        var dtos = _mapper.Map<IEnumerable<BannerDto>>(banners.OrderBy(x => x.Order));
-        return ApiResponse<IEnumerable<BannerDto>>.SuccessResult(dtos);
+        // Admin her şeyi görür
+        banners = await _unitOfWork.Banners.GetAllAsync();
     }
+    else
+    {
+        // Şirket yöneticisi sadece kendi şirketinin reklamlarını görür
+        banners = await _unitOfWork.Banners.FindAsync(x => x.CompanyId == companyId);
+    }
+
+    var dtos = _mapper.Map<IEnumerable<BannerDto>>(banners.OrderBy(x => x.Order));
+    return ApiResponse<IEnumerable<BannerDto>>.SuccessResult(dtos);
+}
 
     public async Task<ApiResponse<Guid>> CreateAsync(BannerCreateDto dto)
     {
@@ -52,5 +64,12 @@ public class BannerService : IBannerService
         _unitOfWork.Banners.Delete(banner);
         await _unitOfWork.SaveChangesAsync();
         return ApiResponse<bool>.SuccessResult(true, "Banner silindi.");
+    }
+
+    public async Task<ApiResponse<BannerDto>> GetByIdAsync(Guid id)
+    {
+        var banner = await _unitOfWork.Banners.GetByIdAsync(id);
+        if (banner == null) return ApiResponse<BannerDto>.ErrorResult("Banner bulunamadı.");
+        return ApiResponse<BannerDto>.SuccessResult(_mapper.Map<BannerDto>(banner));
     }
 }

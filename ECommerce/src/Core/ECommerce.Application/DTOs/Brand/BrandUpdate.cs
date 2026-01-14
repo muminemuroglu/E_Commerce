@@ -9,5 +9,6 @@ public class BrandUpdateDto
     public string Name { get; set; } = string.Empty;
 
     public string? LogoUrl { get; set; }
+    public Guid CompanyId { get; set; }
    
 }

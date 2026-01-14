@@ -10,4 +10,6 @@ public interface IReviewService
     Task<ApiResponse<bool>> UpdateAsync(Guid id, ReviewUpdateDto dto);
     Task<ApiResponse<bool>> DeleteAsync(Guid id);
 
+    Task<ApiResponse<IEnumerable<ReviewDto>>> GetAllWithDetailsAsync(Guid? companyId, string role);
+
 }

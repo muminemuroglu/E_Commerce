@@ -12,4 +12,6 @@ public interface ICompanyService
     Task<ApiResponse<bool>> UpdateAsync(Guid id, CompanyUpdateDto dto);
     Task<ApiResponse<bool>> DeleteAsync(Guid id);
 
+    
+
 }

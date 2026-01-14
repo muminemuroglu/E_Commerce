@@ -2,6 +2,7 @@ using ECommerce.Application.DTOs.Company;
 using ECommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ECommerce.RestApi.Controllers;
 
@@ -33,16 +34,34 @@ public class CompanyController : ControllerBase
         return result.Success ? Ok(result) : BadRequest(result);
     }
 
-    [HttpPost("Update/{id}")]
-    [Authorize(Roles = "Admin")]
+    [HttpGet("GetById/{id}")]
+    [Authorize(Roles = "Admin,CompanyManager")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        // Güvenlik: Manager ise sadece kendi ID'sini isteyebilir
+    if (User.IsInRole("CompanyManager") && id.ToString() != User.FindFirstValue("companyId"))
+        return Forbid();
+
+    return Ok(await _companyService.GetByIdAsync(id));
+    }
+
+    [HttpPut("Update/{id}")]
+    [Authorize(Roles = "Admin,CompanyManager")]
     public async Task<IActionResult> Update(Guid id, CompanyUpdateDto dto)
     {
-        var result = await _companyService.UpdateAsync(id, dto);
-        return result.Success ? Ok(result) : BadRequest(result);
+        // Güvenlik Kontrolü: Eğer Admin değilse, sadece kendi şirketini güncelleyebilir
+        if (!User.IsInRole("Admin"))
+        {
+            var userCompanyId = User.FindFirstValue("companyId");
+            if (id.ToString() != userCompanyId) return Forbid();
+        }
+        
+        return Ok(await _companyService.UpdateAsync(id, dto));
     }
 
 
     [HttpDelete("Delete/{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(Guid id)
     {
         var result = await _companyService.DeleteAsync(id);

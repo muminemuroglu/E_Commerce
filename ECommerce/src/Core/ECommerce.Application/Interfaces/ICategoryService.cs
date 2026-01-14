@@ -11,4 +11,6 @@ public interface ICategoryService
     Task<ApiResponse<bool>> UpdateAsync(Guid id, CategoryUpdateDto dto);
     Task<ApiResponse<bool>> DeleteAsync(Guid id);
     Task<ApiResponse<IEnumerable<CategoryDto>>> GetByCompanyIdAsync(Guid companyId);
+    
+
 }

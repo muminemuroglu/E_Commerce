@@ -1,14 +1,18 @@
 using ECommerce.Application.DTOs;
-using ECommerce.Application.DTOs.Brand;
 using ECommerce.Application.DTOs.Cargo;
-using ECommerce.Application.DTOs.Category;
 using ECommerce.Application.Responses;
 
 namespace ECommerce.Application.Interfaces;
-public interface ICargoService {
-     Task<ApiResponse<IEnumerable<CargoDto>>> GetAllAsync();
+public interface ICargoService 
+{
+    Task<ApiResponse<IEnumerable<CargoDto>>> GetAllAsync();
+    Task<ApiResponse<IEnumerable<CargoDto>>> GetByCompanyIdAsync(Guid companyId);
     Task<ApiResponse<CargoDto>> GetByIdAsync(Guid id);
     Task<ApiResponse<Guid>> CreateAsync(CargoCreateDto dto);
     Task<ApiResponse<bool>> UpdateAsync(Guid id, CargoUpdateDto dto);
     Task<ApiResponse<bool>> DeleteAsync(Guid id);
+    
+    
+
 }
+

@@ -4,6 +4,7 @@ namespace ECommerce.Domain.Interfaces
 {
     public interface ICategoryRepository : IGenericRepository<Category>
     {
+       
         
     }
 }

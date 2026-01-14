@@ -9,4 +9,6 @@ public class Cargo : BaseEntity
     // Her kargo ayarı bir şirkete özeldir
     public Guid CompanyId { get; set; }
     public Company Company { get; set; } = null!;
+
+   
 }

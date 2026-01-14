@@ -10,6 +10,8 @@ public class Customer : BaseEntity
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
 
+   
+
     // Müşterinin sipariş geçmişi
     public ICollection<Order> Orders { get; set; } = new List<Order>();
 }

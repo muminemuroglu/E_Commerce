@@ -12,6 +12,8 @@ namespace ECommerce.Application.DTOs.Company;
         [Required, MinLength(5)]
         public string FullAddress { get; set; } = string.Empty;
 
+        public string TaxNumber { get; set; } = string.Empty;
+
         [Required, MinLength(10)]
         public string Phone { get; set; } = string.Empty;
 

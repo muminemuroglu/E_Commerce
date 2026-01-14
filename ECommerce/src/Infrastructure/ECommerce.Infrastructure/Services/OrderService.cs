@@ -5,7 +5,7 @@ using ECommerce.Application.Responses;
 using ECommerce.Domain.Entities;
 using ECommerce.Domain.Interfaces;
 
-    public class OrderService : IOrderService
+public class OrderService : IOrderService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -22,11 +22,33 @@ using ECommerce.Domain.Interfaces;
         return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(_mapper.Map<IEnumerable<OrderDto>>(orders));
     }
 
-     public async Task<ApiResponse<OrderDto>> GetByIdAsync(Guid id)
+    public async Task<ApiResponse<OrderDto>> GetByIdAsync(Guid id)
     {
-        var order = await _unitOfWork.Orders.GetByIdAsync(id);
+        // YENİ KOD: İlişkili verilerle birlikte çekiyoruz
+        var order = await _unitOfWork.Orders.GetByIdWithDetailsAsync(id);
+
         if (order == null) return ApiResponse<OrderDto>.ErrorResult("Sipariş bulunamadı.");
         return ApiResponse<OrderDto>.SuccessResult(_mapper.Map<OrderDto>(order));
+    }
+
+
+    public async Task<ApiResponse<IEnumerable<OrderDto>>> SearchByOrderNumberAsync(string orderNumber)
+    {
+        if (string.IsNullOrWhiteSpace(orderNumber))
+            return await GetAllAsync();
+
+        // Sadece OrderNumber içinde (Büyük/Küçük harf duyarsız) arama yapar
+        // Önemli: DTO'da OrderItems listesinin dolu gelmesi için Repository'de Include(x => x.OrderItems) yapılmalıdır.
+        var orders = await _unitOfWork.Orders.FindAsync(o =>
+            o.OrderNumber.ToLower().Contains(orderNumber.ToLower()));
+
+        if (orders == null || !orders.Any())
+        {
+            return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(new List<OrderDto>(), $"'{orderNumber}' numaralı sipariş kaydı bulunamadı.");
+        }
+
+        var dtos = _mapper.Map<IEnumerable<OrderDto>>(orders);
+        return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(dtos);
     }
 
     public async Task<ApiResponse<Guid>> CreateOrderAsync(OrderCreateDto dto)
@@ -39,11 +61,17 @@ using ECommerce.Domain.Interfaces;
         // 2. Sipariş kalemlerini ekle ve STOK KONTROLÜ yap
         foreach (var item in order.OrderItems)
         {
-            var product = await _unitOfWork.Products.GetByIdAsync(item.ProductId);
+            var product = await _unitOfWork.Products.GetByIdAsync(item.ProductId); //UnitOfWork kullanmanın faydası: Eğer sipariş kalemlerinde bir hata çıkarsa, siparişin kendisi de kaydedilmeyecek.
             if (product == null || product.Stock < item.Quantity)
             {
                 return ApiResponse<Guid>.ErrorResult($"{product?.Name ?? "Ürün"} için yetersiz stok!");
             }
+
+            // Fiyatı o anki güncel ürün fiyatından al (Güvenlik için önemli)
+            item.Price = product.Price;
+
+            // Ara toplamı genel toplama ekle: (Fiyat * Miktar)
+            order.TotalAmount += (item.Price * item.Quantity);
 
             // Stok düşürme işlemi
             product.Stock -= item.Quantity;
@@ -51,14 +79,13 @@ using ECommerce.Domain.Interfaces;
         }
 
         await _unitOfWork.Orders.AddAsync(order);
-        
+
         // 3. Tek bir SaveChanges ile her şeyi (Sipariş + Kalemler + Stok Güncelleme) kaydet
-        await _unitOfWork.SaveChangesAsync();  //UnitOfWork kullanmanın asıl faydasını burada göreceğiz. Eğer sipariş kalemlerinde bir hata çıkarsa, siparişin kendisi de kaydedilmeyecek.
-        
+        await _unitOfWork.SaveChangesAsync();
+
         return ApiResponse<Guid>.SuccessResult(order.Id, "Siparişiniz başarıyla oluşturuldu.");
     }
 
-    
     public async Task<ApiResponse<bool>> UpdateStatusAsync(Guid id, ECommerce.Domain.Enums.OrderStatus status)
     {
         var order = await _unitOfWork.Orders.GetByIdAsync(id);
@@ -70,23 +97,41 @@ using ECommerce.Domain.Interfaces;
         return ApiResponse<bool>.SuccessResult(true, "Sipariş durumu güncellendi.");
     }
 
-    public async Task<ApiResponse<IEnumerable<OrderDto>>> SearchByOrderNumberAsync(string orderNumber)
+    public async Task<ApiResponse<IEnumerable<OrderDto>>> GetByCustomerIdAsync(Guid customerId, Guid? companyId, string? role)
     {
-    if (string.IsNullOrWhiteSpace(orderNumber))
-        return await GetAllAsync();
+        // Admin ise companyId göndermiyoruz (null), manager ise gönderiyoruz
+        Guid? filterCompanyId = role == "Admin" ? null : companyId;
 
-    // Sadece OrderNumber içinde (Büyük/Küçük harf duyarsız) arama yapar
-    // Önemli: DTO'da OrderItems listesinin dolu gelmesi için Repository'de Include(x => x.OrderItems) yapılmalıdır.
-    var orders = await _unitOfWork.Orders.FindAsync(o => 
-        o.OrderNumber.ToLower().Contains(orderNumber.ToLower()));
+        var orders = await _unitOfWork.Orders.GetByCustomerIdWithDetailsAsync(customerId, filterCompanyId);
 
-    if (orders == null || !orders.Any())
-    {
-        return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(new List<OrderDto>(), $"'{orderNumber}' numaralı sipariş kaydı bulunamadı.");
+        // AutoMapper artık Order.Customer.User yolunu takip edip ismi doldurabilecek
+        var dtos = _mapper.Map<IEnumerable<OrderDto>>(orders);
+
+        return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(dtos);
     }
 
-    var dtos = _mapper.Map<IEnumerable<OrderDto>>(orders);
-    return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(dtos);
-    }
 
+    // ECommerce.Infrastructure.Services / OrderService.cs
+
+    // ECommerce.Infrastructure.Services / OrderService.cs
+    public async Task<ApiResponse<IEnumerable<OrderDto>>> GetAllFilteredAsync(Guid? companyId, string role)
+    {
+        IEnumerable<Order> orders;
+
+        // BURASI ÇOK KRİTİK: Sadece yazdığımız detaylı metod çağrılmalı
+        if (role == "Admin")
+        {
+            // Admin her şeyi görür, companyId null gönderiyoruz
+            orders = await _unitOfWork.Orders.GetAllWithDetailsAsync(null);
+        }
+        else
+        {
+            // Manager sadece kendi şirketini görür
+            orders = await _unitOfWork.Orders.GetAllWithDetailsAsync(companyId);
+        }
+
+        var dtos = _mapper.Map<IEnumerable<OrderDto>>(orders);
+        return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(dtos);
+    }
 }
+

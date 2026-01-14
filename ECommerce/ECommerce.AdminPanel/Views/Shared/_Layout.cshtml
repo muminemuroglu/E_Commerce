@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="tr" data-bs-theme="light">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - E-Commerce Admin</title>
 
     <script>
-        (function() {
+        (function () {
             var theme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-bs-theme', theme);
         })();
@@ -20,13 +21,14 @@
 
     @await RenderSectionAsync("Styles", required: false)
 </head>
+
 <body>
     @{
         // Session'dan kullanıcı bilgilerini alıyoruz
         var userName = Context.Session.GetString("UserName") ?? "Kullanıcı";
         var companyId = Context.Session.GetString("CompanyId");
         var initials = string.Join("", userName.Split(' ').Take(2).Select(x => x.FirstOrDefault())).ToUpper();
-        
+
         var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
         var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     }
@@ -45,7 +47,8 @@
             <div class="nav-section-title">Ana Menü</div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
+                    <a class="nav-link @(currentController == "Home" ? "active" : "")" asp-controller="Home"
+                        asp-action="Index">
                         <i class="fas fa-home"></i>
                         <span>Dashboard</span>
                     </a>
@@ -55,49 +58,57 @@
             <div class="nav-section-title">E-Ticaret</div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Product" ? "active" : "")" asp-controller="Product" asp-action="Index">
+                    <a class="nav-link @(currentController == "Product" ? "active" : "")" asp-controller="Product"
+                        asp-action="Index">
                         <i class="fas fa-box"></i>
                         <span>Ürünler</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Category" ? "active" : "")" asp-controller="Category" asp-action="Index">
+                    <a class="nav-link @(currentController == "Category" ? "active" : "")" asp-controller="Category"
+                        asp-action="Index">
                         <i class="fas fa-layer-group"></i>
                         <span>Kategoriler</span>
                     </a>
                 </li>
-                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Brand" ? "active" : "")" asp-controller="Brand" asp-action="Index">
+                <li class="nav-item">
+                    <a class="nav-link @(currentController == "Brand" ? "active" : "")" asp-controller="Brand"
+                        asp-action="Index">
                         <i class="fas fa-layer-group"></i>
                         <span>Markalar</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Order" ? "active" : "")" asp-controller="Order" asp-action="Index">
+                    <a class="nav-link @(currentController == "Order" ? "active" : "")" asp-controller="Order"
+                        asp-action="Index">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Siparişler</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Customer" ? "active" : "")" asp-controller="Customer" asp-action="Index">
+                    <a class="nav-link @(currentController == "Customer" ? "active" : "")" asp-controller="Customer"
+                        asp-action="Index">
                         <i class="fas fa-users"></i>
                         <span>Müşteriler</span>
                     </a>
                 </li>
-                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Review" ? "active" : "")" asp-controller="Review" asp-action="Index">
+                <li class="nav-item">
+                    <a class="nav-link @(currentController == "Review" ? "active" : "")" asp-controller="Review"
+                        asp-action="Index">
                         <i class="fas fa-layer-group"></i>
                         <span>Yorumlar</span>
                     </a>
                 </li>
-                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Cargo" ? "active" : "")" asp-controller="Cargo" asp-action="Index">
+                <li class="nav-item">
+                    <a class="nav-link @(currentController == "Cargo" ? "active" : "")" asp-controller="Cargo"
+                        asp-action="Index">
                         <i class="fas fa-layer-group"></i>
                         <span>Kargo İşlemleri</span>
                     </a>
                 </li>
-                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Banner" ? "active" : "")" asp-controller="Banner" asp-action="Index">
+                <li class="nav-item">
+                    <a class="nav-link @(currentController == "Banner" ? "active" : "")" asp-controller="Banner"
+                        asp-action="Index">
                         <i class="fas fa-layer-group"></i>
                         <span>Reklam Yönetimi</span>
                     </a>
@@ -107,13 +118,15 @@
             <div class="nav-section-title">Ayarlar</div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "Company" ? "active" : "")" asp-controller="Company" asp-action="Index">
+                    <a class="nav-link @(currentController == "Company" ? "active" : "")" asp-controller="Company"
+                        asp-action="Index">
                         <i class="fas fa-building"></i>
                         <span>Şirketim</span>
                     </a>
                 </li>
-                 <li class="nav-item">
-                    <a class="nav-link @(currentController == "User" ? "active" : "")" asp-controller="User" asp-action="Index">
+                <li class="nav-item">
+                    <a class="nav-link @(currentController == "User" ? "active" : "")" asp-controller="User"
+                        asp-action="Index">
                         <i class="fas fa-building"></i>
                         <span>Kullanıcı&Rol Yönetimi</span>
                     </a>
@@ -128,13 +141,17 @@
         </nav>
 
         <div class="sidebar-footer">
-            <div class="user-info">
+            <a asp-controller="User" asp-action="Profile" class="user-info text-decoration-none"
+                style="cursor: pointer;">
                 <div class="user-avatar">@initials</div>
                 <div class="user-details">
                     <div class="user-name">@userName</div>
-                    <div class="user-role">@(string.IsNullOrEmpty(companyId) ? "Sistem Admin" : "Şirket Yöneticisi")</div>
+                    <div class="user-role">
+                        @(string.IsNullOrEmpty(companyId) ? "Sistem Admin" : "Şirket Yöneticisi")
+                        <i class="fas fa-cog ms-1 small opacity-50"></i>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </aside>
 
@@ -165,12 +182,19 @@
 
     <script>
         // Toastr Bildirimleri
-        $(document).ready(function() {
-            @if (TempData["SuccessMessage"] != null) { <text>toastr.success('@TempData["SuccessMessage"]');</text> }
-            @if (TempData["ErrorMessage"] != null) { <text>toastr.error('@TempData["ErrorMessage"]');</text> }
+        $(document).ready(function () {
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>toastr.success('@TempData["SuccessMessage"]');</text>
+            }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <text>toastr.error('@TempData["ErrorMessage"]');</text>
+                }
         });
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

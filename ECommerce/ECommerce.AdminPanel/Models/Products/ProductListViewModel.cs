@@ -5,6 +5,7 @@ namespace ECommerce.AdminPanel.Models.Products;
 public class ProductListViewModel
 {
     public PagedResult<ProductDto> Products { get; set; } = new();
+    public Guid CompanyId { get; set; }
 }
 
 public class PagedResult<T>

@@ -10,4 +10,5 @@ public interface IBrandService {
     Task<ApiResponse<Guid>> CreateAsync(BrandCreateDto dto);
     Task<ApiResponse<bool>> UpdateAsync(Guid id, BrandUpdateDto dto);
     Task<ApiResponse<bool>> DeleteAsync(Guid id);
+    Task<ApiResponse<IEnumerable<BrandDto>>> GetByCompanyIdAsync(Guid companyId);
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using ECommerce.Application.DTOs.Order;
 using ECommerce.Application.Interfaces;
 using ECommerce.Infrastructure.Services;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize] // Sipariş işlemleri için giriş zorunlu
-[ApiKey]    // X-Api-Key zorunlu
+//[ApiKey]    // X-Api-Key zorunlu
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
@@ -18,12 +19,25 @@ public class OrderController : ControllerBase
         _orderService = orderService;
     }
 
-    [HttpGet("List")]
+    /*[HttpGet("List")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _orderService.GetAllAsync();
         return Ok(result);
-    }
+    }*/
+
+
+    [HttpGet("List")]
+public async Task<IActionResult> GetAll()
+{
+    var role = User.FindFirstValue(ClaimTypes.Role);
+    var companyIdStr = User.FindFirstValue("companyId");
+    Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
+
+    // OrderService içinde yeni bir metot veya filtreleme ekleyelim
+    var result = await _orderService.GetAllFilteredAsync(companyId, role ?? ""); 
+    return Ok(result);
+}
 
     [HttpPost("Create")]
     public async Task<IActionResult> Create(OrderCreateDto dto)
@@ -55,4 +69,15 @@ public class OrderController : ControllerBase
         var result = await _orderService.SearchByOrderNumberAsync(orderNumber);
         return Ok(result);
     }
+
+[HttpGet("ByCustomer/{customerId}")]
+public async Task<IActionResult> GetByCustomer(Guid customerId)
+{
+    var role = User.FindFirstValue(ClaimTypes.Role);
+    var companyIdStr = User.FindFirstValue("companyId");
+    Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
+
+    var result = await _orderService.GetByCustomerIdAsync(customerId, companyId, role ?? "");
+    return Ok(result);
+}
 }

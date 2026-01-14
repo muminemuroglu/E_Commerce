@@ -20,6 +20,8 @@ public class CategoryService : ICategoryService
 
     public async Task<ApiResponse<IEnumerable<CategoryDto>>> GetAllAsync()
     {
+
+        
         var categories = await _unitOfWork.Categories.GetAllAsync();
         var dtos = _mapper.Map<IEnumerable<CategoryDto>>(categories);
         return ApiResponse<IEnumerable<CategoryDto>>.SuccessResult(dtos);
@@ -74,4 +76,6 @@ public class CategoryService : ICategoryService
         var dtos = _mapper.Map<IEnumerable<CategoryDto>>(categories);
         return ApiResponse<IEnumerable<CategoryDto>>.SuccessResult(dtos);
     }
+
+    
 }

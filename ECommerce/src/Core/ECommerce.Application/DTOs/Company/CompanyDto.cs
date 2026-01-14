@@ -12,6 +12,10 @@ public class CompanyDto
     public string ApiKey { get; set; } = string.Empty; // Yönergedeki API Key gereksinimi için
     public bool IsApproved { get; set; }
 
+    public string TaxNumber { get; set; } = string.Empty;
+
+    public string FullAddress { get; set; } = string.Empty;
+
       // BaseEntity
         public bool Status { get; set; }
         public bool IsDeleted { get; set; }

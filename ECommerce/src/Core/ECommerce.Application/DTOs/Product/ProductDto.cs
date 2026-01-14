@@ -31,4 +31,8 @@ public class ProductDto
      [Required(ErrorMessage = "Marka seçimi zorunludur.")]
     public string BrandName { get; set; } = string.Empty;
     public string CompanyName { get; set; } = string.Empty;
+
+    public Guid CategoryId { get; set; }
+    public Guid BrandId { get; set; }
+    public Guid CompanyId { get; set; }
 }

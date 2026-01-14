@@ -6,9 +6,11 @@ using ECommerce.Application.Responses;
 
 namespace ECommerce.Application.Interfaces;
 public interface IBannerService {
-    Task<ApiResponse<IEnumerable<BannerDto>>> GetAllAsync();
+    Task<ApiResponse<IEnumerable<BannerDto>>> GetAllAsync(Guid? companyId, string role);
     //Task<ApiResponse<BannerDto>> GetByIdAsync(Guid id);
     Task<ApiResponse<Guid>> CreateAsync(BannerCreateDto dto);
     Task<ApiResponse<bool>> UpdateAsync(Guid id, BannerUpdateDto dto);
     Task<ApiResponse<bool>> DeleteAsync(Guid id);
+
+    Task<ApiResponse<BannerDto>> GetByIdAsync(Guid id);
 }

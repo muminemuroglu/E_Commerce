@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace ECommerce.Application.DTOs.Review;
 
 public class ReviewDto
@@ -13,9 +12,11 @@ public class ReviewDto
     [Required]
     [Range(1, 5, ErrorMessage = "Puan 1 ile 5 arasında olmalıdır.")]
     public int Rating { get; set; }
-
+    public string CustomerName { get; set; } = string.Empty;
+    public string ProductName { get; set; } = string.Empty;
     public Guid ProductId { get; set; }
     public Guid CustomerId { get; set; }
+
 
         // BaseEntity
         public bool Status { get; set; }
