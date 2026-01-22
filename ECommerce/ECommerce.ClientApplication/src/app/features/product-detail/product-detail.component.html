@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+<div class="container py-5">
+  @if (loading) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+  } @else if (product) {
+    <div class="row g-5 bg-white p-4 rounded-4 shadow-sm">
+      
+      <div class="col-lg-6">
+        <div class="product-gallery text-center border rounded-4 p-4">
+          <img [src]="product.imageUrl" class="img-fluid main-img" [alt]="product.name">
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="ps-lg-4">
+          <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb small">
+              <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none">Ana Sayfa</a></li>
+              <li class="breadcrumb-item active">{{ product.categoryName || 'Ürün' }}</li>
+            </ol>
+          </nav>
+
+          <h1 class="h3 fw-bold mb-3">{{ product.name }}</h1>
+          
+          <div class="d-flex align-items-center gap-2 mb-4">
+            @if (product.isFreeShipping) {
+              <span class="badge bg-success-subtle text-success border border-success-subtle">
+                <i class="bi bi-truck me-1"></i>Kargo Bedava
+              </span>
+            }
+            @if (product.isFastDelivery) {
+              <span class="badge bg-warning-subtle text-dark border border-warning-subtle">
+                <i class="bi bi-lightning-fill me-1"></i>Hızlı Gönderi
+              </span>
+            }
+          </div>
+
+          <div class="price-section bg-light p-4 rounded-4 mb-4">
+            <div class="display-5 fw-bold text-primary mb-1">
+              {{ product.price }} TL
+            </div>
+            <p class="text-muted small mb-0">KDV Dahil fiyattır.</p>
+          </div>
+
+          <div class="actions d-grid gap-3">
+            <button class="btn btn-primary btn-lg rounded-pill py-3 fw-bold shadow">
+              <i class="bi bi-cart-plus me-2"></i>Sepete Ekle
+            </button>
+            <button class="btn btn-outline-secondary btn-lg rounded-pill py-3 fw-bold">
+              <i class="bi bi-heart me-2"></i>Favorilerime Ekle
+            </button>
+          </div>
+          <hr class="my-5 opacity-5">
+
+          <div class="description-section">
+            <h5 class="fw-bold mb-3">Ürün Açıklaması</h5>
+            <p class="text-muted leading-relaxed">
+              {{ product.description || 'Bu ürün için henüz bir açıklama girilmemiştir.' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="alert alert-danger rounded-4">Ürün bulunamadı.</div>
+  }
+</div>

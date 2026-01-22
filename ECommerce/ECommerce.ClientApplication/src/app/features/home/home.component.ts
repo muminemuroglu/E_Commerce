@@ -1,0 +1,61 @@
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BannerService } from '../../core/services/bannerService.service';
+import { ProductService } from '../../core/services/productService.service';
+import { Banner } from '../../core/models/banner';
+import { Product } from '../../core/models/product';
+import { RouterModule} from '@angular/router';
+
+declare var bootstrap: any;
+
+@Component({
+    selector: 'app-home',
+    standalone: true,
+    imports: [CommonModule,RouterModule],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit, AfterViewInit {
+    banners: Banner[] = [];
+    products: Product[] = [];
+
+    constructor(
+        private bannerService: BannerService,
+        private productService: ProductService) { }
+
+    ngOnInit(): void {
+        // Ürünleri Çek 
+        this.productService.getFeaturedProducts().subscribe({
+            next: (data) => {
+                console.log("API'den gelen Ürün verisi:", data);
+                this.products = data;
+            },
+            error: (err) => console.error("Ürün servisi hatası:", err)
+        });
+
+        // Bannerları Çek
+        this.bannerService.getBanners().subscribe({
+            next: (data) => {
+                this.banners = data;
+                this.initCarousel(); // Ayrı bir metoda aldık
+            },
+            error: (err) => console.error("Banner servisi hatası:", err)
+        });
+    }
+
+    private initCarousel() {
+        setTimeout(() => {
+            const carouselElement = document.querySelector('#heroCarousel');
+            if (carouselElement && typeof bootstrap !== 'undefined') {
+                const carousel = new bootstrap.Carousel(carouselElement, {
+                    interval: 3000,
+                    ride: 'carousel',
+                    pause: 'hover'
+                });
+                carousel.cycle(); // Manuel olarak döngüyü başlat
+            }
+        }, 300); // Süreyi biraz artırdık ki DOM tam yerleşsin
+    }
+
+    ngAfterViewInit(): void { }
+}

@@ -11,7 +11,6 @@ namespace ECommerce.RestApi.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 //[ApiKey] // Her istekte X-Api-Key zorunlu
-[Authorize] // Her istekte geçerli JWT Token zorunlu
 public class CategoryController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
@@ -29,37 +28,30 @@ public class CategoryController : ControllerBase
     }*/
 
     [HttpGet("List")]
+    [AllowAnonymous] // Kategorileri herkes görebilsin (Katalog amaçlı)
     public async Task<IActionResult> GetAll()
 
     {
-// 1. Kullanıcının rolünü alalım
-    var userRole = User.FindFirstValue(ClaimTypes.Role);
-    
-    // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
-    if (userRole == "Admin")
-    {
-        var result = await _categoryService.GetAllAsync();
-        return Ok(result);
-    }
-     // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
-    var companyIdStr = User.FindFirstValue("companyId");
-    if (Guid.TryParse(companyIdStr, out Guid companyId))
-    {
-        var result = await _categoryService.GetByCompanyIdAsync(companyId);
-        return Ok(result);
-    }
+        // 1. Kullanıcının rolünü alalım
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
 
-    // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
-    return Ok(ApiResponse<IEnumerable<CategoryDto>>.SuccessResult(new List<CategoryDto>()));
-        
-    }
+        // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
+        if (userRole == "Admin")
+        {
+            var result = await _categoryService.GetAllAsync();
+            return Ok(result);
+        }
+        // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
+        var companyIdStr = User.FindFirstValue("companyId");
+        if (Guid.TryParse(companyIdStr, out Guid companyId))
+        {
+            var result = await _categoryService.GetByCompanyIdAsync(companyId);
+            return Ok(result);
+        }
 
-    [HttpGet("Company/{companyId}")]
-    [Authorize(Policy = "CompanyIsolation")] // Başkasının kategorilerini görmeyi engeller
-    public async Task<IActionResult> GetByCompany(Guid companyId)
-    {
-        var result = await _categoryService.GetByCompanyIdAsync(companyId);
-        return Ok(result);
+        // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
+        return Ok(ApiResponse<IEnumerable<CategoryDto>>.SuccessResult(new List<CategoryDto>()));
+
     }
 
     [HttpGet("GetById/{id}")]
@@ -70,8 +62,18 @@ public class CategoryController : ControllerBase
         return result.Success ? Ok(result) : NotFound(result);
     }
 
+
+    [HttpGet("Company/{companyId}")]
+    [Authorize]
+    [Authorize(Policy = "CompanyIsolation")] // Başkasının kategorilerini görmeyi engeller
+    public async Task<IActionResult> GetByCompany(Guid companyId)
+    {
+        var result = await _categoryService.GetByCompanyIdAsync(companyId);
+        return Ok(result);
+    }
+
     [HttpPost("Create")]
-    [Authorize(Roles = "Admin,CompanyManager")] 
+    [Authorize(Roles = "Admin,CompanyManager")]
     public async Task<IActionResult> Create(CategoryCreateDto dto)
     {
         var result = await _categoryService.CreateAsync(dto);

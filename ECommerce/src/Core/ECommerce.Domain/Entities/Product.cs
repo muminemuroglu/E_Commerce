@@ -10,6 +10,10 @@ public class Product : BaseEntity
     public int Stock { get; set; }
     public string? ImageUrl { get; set; }
 
+    public bool IsFeatured { get; set; }
+    public bool IsFreeShipping { get; set; }
+    public bool IsFastDelivery { get; set; }
+
     // İlişkiler
     public Guid CategoryId { get; set; }
     public Category Category { get; set; } = null!;

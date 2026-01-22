@@ -1,0 +1,26 @@
+.product-gallery {
+  background-color: #fff;
+  .main-img {
+    max-height: 500px;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.price-section {
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.badge {
+  font-weight: 600;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+}
+
+.breadcrumb-item {
+  font-weight: 500;
+  color: var(--color-gray-500);
+}

@@ -29,32 +29,32 @@ public class BrandController : ControllerBase
         return Ok(result);
     }*/
 
-[HttpGet("List")]
+    [HttpGet("List")]
+    [AllowAnonymous] // Markaları herkes görebilsin (Katalog amaçlı)
     public async Task<IActionResult> GetAll()
 
     {
-// 1. Kullanıcının rolünü alalım
-    var userRole = User.FindFirstValue(ClaimTypes.Role);
-    
-    // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
-    if (userRole == "Admin")
-    {
-        var result = await _brandService.GetAllAsync();
-        return Ok(result);
-    }
-     // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
-    var companyIdStr = User.FindFirstValue("companyId");
-    if (Guid.TryParse(companyIdStr, out Guid companyId))
-    {
-        var result = await _brandService.GetByCompanyIdAsync(companyId);
-        return Ok(result);
-    }
+        // 1. Kullanıcının rolünü alalım
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
 
-    // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
-    return Ok(ApiResponse<IEnumerable<BrandDto>>.SuccessResult(new List<BrandDto>()));
-        
-    }
+        // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
+        if (userRole == "Admin")
+        {
+            var result = await _brandService.GetAllAsync();
+            return Ok(result);
+        }
+        // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
+        var companyIdStr = User.FindFirstValue("companyId");
+        if (Guid.TryParse(companyIdStr, out Guid companyId))
+        {
+            var result = await _brandService.GetByCompanyIdAsync(companyId);
+            return Ok(result);
+        }
 
+        // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
+        return Ok(ApiResponse<IEnumerable<BrandDto>>.SuccessResult(new List<BrandDto>()));
+
+    }
 
     [HttpGet("GetById/{id}")]
     public async Task<IActionResult> GetById(Guid id)

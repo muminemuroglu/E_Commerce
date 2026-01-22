@@ -107,4 +107,12 @@ public async Task<IActionResult> GetAll()
         var result = await _productService.DeleteAsync(id);
         return result.Success ? Ok(result) : BadRequest(result);
     }
+
+    [HttpGet("Featured")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetFeaturedProducts()
+    {
+        var result = await _productService.GetFeaturedProductsAsync();
+        return Ok(result);
+    }
 }
