@@ -18,6 +18,10 @@ public interface ICustomerService {
     // Task<ApiResponse<IEnumerable<CustomerDto>>> GetByCompanyIdAsync(Guid companyId);
 
     Task<ApiResponse<CustomerDto>> GetByIdAsync(Guid id);
+
+    Task<ApiResponse<bool>> UpdateProfileAsync(CustomerUpdateDto dto);
+    Task<ApiResponse<CustomerDto>> GetProfileByUserIdAsync(Guid userId);
+
 }
 
 

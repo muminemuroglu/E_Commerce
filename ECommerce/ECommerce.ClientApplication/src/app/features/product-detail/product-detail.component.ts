@@ -5,6 +5,8 @@ import { Product } from '../../core/models/product';
 import { ProductService } from '../../core/services/productService.service';
 import { Review } from '../../core/models/review';
 import { ReviewService } from '../../core/services/review-service.service';
+import { CartService } from '../../core/services/cart-service.service';
+import { FavoriteService } from '../../core/services/favorite-service.service';
 
 
 @Component({
@@ -24,6 +26,8 @@ export class ProductDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private reviewService: ReviewService, // Servisi inject ettik
+     private cartService: CartService,         // Inject et
+    public favoriteService: FavoriteService,  // HTML'den erişmek için Public Inject et
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -85,4 +89,22 @@ export class ProductDetailComponent implements OnInit {
     tabElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
+ addToCart() {
+    if (this.product) {
+      this.cartService.addToCart(this.product);
+      alert("Ürün sepete eklendi!"); // Şimdilik basit alert, sonra Toast ekleriz
+    }
+  }
+
+  // FAVORİ EKLE/ÇIKAR METODU
+  toggleFav() {
+    if (this.product) {
+      this.favoriteService.toggleFavorite(this.product);
+    }
+  }
 }
+
+
+
+
+

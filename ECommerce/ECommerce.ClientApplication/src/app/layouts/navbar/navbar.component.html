@@ -32,16 +32,16 @@
         </div>
 
         <a routerLink="/cart" class="btn btn-outline-light text-dark border-0 d-flex align-items-center gap-2 position-relative hover-effect">
-          <div class="position-relative">
-            <i class="bi bi-cart3 fs-4"></i>
-            @if (cartService.itemCount() > 0) {
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary border border-light">
-                {{ cartService.itemCount() }}
-              </span>
-            }
-          </div>
-          <span class="fw-medium d-none d-md-block">Sepetim</span>
-        </a>
+  <div class="position-relative">
+    <i class="bi bi-cart3 fs-4"></i>
+    @if (cartService.totalItems() > 0) {
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary border border-light animate__animated animate__bounceIn">
+        {{ cartService.totalItems() }}
+      </span>
+    }
+  </div>
+  <span class="fw-medium d-none d-md-block">Sepetim</span>
+</a>
 
         @if (authService.currentUser()) {
           <div class="dropdown">

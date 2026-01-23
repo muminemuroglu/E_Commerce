@@ -16,11 +16,24 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
-    // Basit bir doğrulama
-    if (this.email && this.password) {
-      this.authService.login({ email: this.email, password: this.password });
-      this.router.navigate(['/']); // Ana sayfaya yönlendir
-    }
+ onLogin() {
+  if (this.email && this.password) {
+    // isLoading = true; // İstersen loading ekleyebilirsin
+    
+    this.authService.login({ email: this.email, password: this.password })
+      .subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.router.navigate(['/']); // Başarılıysa yönlendir
+          } else {
+            alert(res.message); // Hata mesajı (Örn: Şifre yanlış)
+          }
+        },
+        error: (err) => {
+          console.error("Giriş hatası:", err);
+          alert("Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.");
+        }
+      });
   }
+}
 }

@@ -1,36 +1,42 @@
 import { Injectable, signal } from '@angular/core';
 import { BaseService } from './baseService.service';
 import { Router } from '@angular/router';
+import { ApiResponse } from '../models/apiResponse';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Kullanıcı giriş durumunu takip eden sinyal (Angular 17+)
-  currentUser = signal<{ name: string, email: string } | null>(null);
+  // Kullanıcı bilgisini tutan sinyal
+  currentUser = signal<{ name: string, email: string, role: string } | null>(null);
 
   constructor(private baseService: BaseService, private router: Router) {
-    // Sayfa yenilendiğinde localStorage'dan kontrol et
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      this.currentUser.set(JSON.parse(storedUser));
+    // Sayfa yenilendiğinde Token varsa kullanıcıyı geri yükle
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.setUserFromToken(token);
     }
   }
 
+  // LOGIN: Gerçek API Bağlantısı
   login(credentials: any) {
-    // Burası normalde API'ye gider, şimdilik simüle ediyoruz
-    // return this.baseService.post('Auth/Login', credentials)...
-    
-    // SİMÜLASYON (Gerçek API bağlanana kadar):
-    const dummyUser = { name: 'Metehan Polat', email: credentials.email };
-    localStorage.setItem('user', JSON.stringify(dummyUser));
-    localStorage.setItem('token', 'fake-jwt-token'); // Token varmış gibi
-    this.currentUser.set(dummyUser);
-    return true; 
+    return this.baseService.post<ApiResponse<string>>('Auth/Login', credentials).pipe(
+      tap(response => {
+        if (response.success && response.data) {
+          const token = response.data;
+
+          // 1. Token'ı sakla
+          localStorage.setItem('token', token);
+
+          // 2. Token'ı çöz ve kullanıcıyı sinyale ata
+          this.setUserFromToken(token);
+        }
+      })
+    );
   }
 
   logout() {
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
     this.currentUser.set(null);
     this.router.navigate(['/']);
@@ -39,4 +45,47 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.currentUser();
   }
+
+  // YARDIMCI METOD: JWT Token'ı çözüp içindeki bilgileri okur
+  private setUserFromToken(token: string) {
+    try {
+      // JWT 3 kısımdan oluşur: Header.Payload.Signature
+      // Bizim işimiz Payload (ortadaki) kısmıyla
+      const payloadBase64 = token.split('.')[1];
+      const payloadJson = atob(payloadBase64);
+      const payload = JSON.parse(payloadJson);
+
+      // Backend'de claim isimleri: 
+      // "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" -> Email
+      // "fullName" -> Ad Soyad (Bizim eklediğimiz)
+      // "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" -> Role
+
+      const user = {
+        name: payload['fullName'] || 'Kullanıcı', // fullName claim'ini oku
+        email: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+        role: payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+      };
+
+      this.currentUser.set(user);
+
+    } catch (error) {
+      console.error('Token çözülemedi:', error);
+      this.logout();
+    }
+  }
+
+  register(user: any) {
+    // Backend'de yeni açtığımız endpoint'e gidiyor
+    return this.baseService.post<ApiResponse<string>>('Auth/RegisterCustomer', user);
+  }
+
+  updateProfile(userDto: any) {
+  return this.baseService.post<ApiResponse<boolean>>('Auth/UpdateProfile', userDto);
+}
+
+changePassword(data: any) {
+  // DTO'ya UserId eklemek gerekebilir, backend kontrolüne göre
+  // const payload = { ...data, userId: this.getUserIdFromToken() }; 
+  return this.baseService.post<ApiResponse<boolean>>('Auth/ChangePassword', data);
+}
 }

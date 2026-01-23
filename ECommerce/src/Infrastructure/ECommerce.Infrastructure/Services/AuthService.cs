@@ -32,11 +32,14 @@ public class AuthService : IAuthService
         if (!PasswordHasher.VerifyPassword(dto.Password, user.PasswordHash))
             return ApiResponse<string>.ErrorResult("E-posta veya şifre hatalı.");
 
-        // 3. Token Üret (JwtTokenHelper kullanarak)
-        // Not: User tablosunda CompanyId Guid? olduğu için boşsa Guid.Empty gönderiyoruz
+        // 3. Token Üret
+        // YENİ: Ad ve Soyadı birleştiriyoruz
+        string fullName = $"{user.FirstName} {user.LastName}";
+
         var token = JwtTokenHelper.GenerateToken(
             user.Id,
             user.Email,
+            fullName, // YENİ: Parametre olarak gönderiyoruz
             user.CompanyId ?? Guid.Empty,
             new List<string> { user.Role }
         );
@@ -112,24 +115,48 @@ public class AuthService : IAuthService
 
     // ECommerce.Infrastructure / Services / AuthService.cs
 
-public async Task<ApiResponse<bool>> ChangePasswordAsync(ChangePasswordDto dto)
-{
-    var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
-    if (user == null) return ApiResponse<bool>.ErrorResult("Kullanıcı bulunamadı.");
-
-    // 1. Mevcut şifreyi doğrula (DB'deki Hash ile girilen şifreyi karşılaştır)
-    if (!PasswordHasher.VerifyPassword(dto.CurrentPassword, user.PasswordHash))
+    public async Task<ApiResponse<bool>> ChangePasswordAsync(ChangePasswordDto dto)
     {
-        return ApiResponse<bool>.ErrorResult("Mevcut şifreniz hatalı.");
+        var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
+        if (user == null) return ApiResponse<bool>.ErrorResult("Kullanıcı bulunamadı.");
+
+        // 1. Mevcut şifreyi doğrula (DB'deki Hash ile girilen şifreyi karşılaştır)
+        if (!PasswordHasher.VerifyPassword(dto.CurrentPassword, user.PasswordHash))
+        {
+            return ApiResponse<bool>.ErrorResult("Mevcut şifreniz hatalı.");
+        }
+
+        // 2. Yeni şifreyi hash'le ve kaydet
+        user.PasswordHash = PasswordHasher.HashPassword(dto.NewPassword);
+        user.UpdatedDate = DateTime.UtcNow;
+
+        _unitOfWork.Users.Update(user);
+        await _unitOfWork.SaveChangesAsync();
+
+        return ApiResponse<bool>.SuccessResult(true, "Şifreniz başarıyla güncellendi.");
     }
 
-    // 2. Yeni şifreyi hash'le ve kaydet
-    user.PasswordHash = PasswordHasher.HashPassword(dto.NewPassword);
-    user.UpdatedDate = DateTime.UtcNow;
+    public async Task<ApiResponse<Guid>> RegisterCustomerAsync(RegisterDto dto)
+{
+    var existingUser = await _unitOfWork.Users.FindAsync(u => u.Email == dto.Email);
+    if (existingUser.Any()) return ApiResponse<Guid>.ErrorResult("Email zaten kayıtlı.");
 
-    _unitOfWork.Users.Update(user);
+    var user = new User
+    {
+        Id = Guid.NewGuid(),
+        FirstName = dto.FirstName,
+        LastName = dto.LastName,
+        Email = dto.Email,
+        PasswordHash = PasswordHasher.HashPassword(dto.Password),
+        Role = "Customer", // Rolü Müşteri yapıyoruz
+        CompanyId = null // Bireysel müşteri olduğu için şirket yok
+    };
+
+    await _unitOfWork.Users.AddAsync(user);
     await _unitOfWork.SaveChangesAsync();
 
-    return ApiResponse<bool>.SuccessResult(true, "Şifreniz başarıyla güncellendi.");
+    return ApiResponse<Guid>.SuccessResult(user.Id, "Kayıt başarılı.");
 }
+
+
 }

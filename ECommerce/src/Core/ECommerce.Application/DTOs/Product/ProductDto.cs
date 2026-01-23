@@ -22,8 +22,12 @@ public class ProductDto
     [Range(0, int.MaxValue, ErrorMessage = "Stok negatif olamaz.")]
     public int Stock { get; set; }
     public string? ImageUrl { get; set; }
-    public bool IsFreeShipping { get; set; } 
+    public bool IsFreeShipping { get; set; }
     public bool IsFastDelivery { get; set; }
+
+    public Guid CategoryId { get; set; }
+    public Guid BrandId { get; set; }
+    public Guid CompanyId { get; set; }
     
     // İlişkili tablodan sadece isim çekiyoruz (Performans dostu)
 
@@ -32,9 +36,6 @@ public class ProductDto
 
      [Required(ErrorMessage = "Marka seçimi zorunludur.")]
     public string BrandName { get; set; } = string.Empty;
-    public string CompanyName { get; set; } = string.Empty;
 
-    public Guid CategoryId { get; set; }
-    public Guid BrandId { get; set; }
-    public Guid CompanyId { get; set; }
+    public string CompanyName { get; set; } = string.Empty;
 }
