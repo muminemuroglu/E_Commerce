@@ -1,37 +1,88 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../core/models/product';
 import { ProductService } from '../../core/services/productService.service';
-import { Navbar } from '../../layouts/navbar/navbar.component';
+import { Review } from '../../core/models/review';
+import { ReviewService } from '../../core/services/review-service.service';
+
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule,Navbar],
+  imports: [CommonModule],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
   product?: Product;
+  reviews: Review[] = []; // Yorumları tutacak dizi
+  averageRating: number = 0; // Ortalama puan
   loading = true;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private reviewService: ReviewService, // Servisi inject ettik
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      // Servisinizde getById metodunun olduğunu varsayıyorum
-      this.productService.getProductById(id).subscribe({
-        next: (data) => {
-          this.product = data;
-          this.loading = false;
-        },
-        error: () => this.loading = false
-      });
+      this.loadData(id);
     }
   }
+
+  loadData(id: string) {
+    // 1. Ürün Detayını Çek
+    this.productService.getProductById(id).subscribe({
+      next: (data) => {
+        this.product = data;
+        
+        // 2. Ürün geldikten sonra Yorumları Çek
+        this.loadReviews(id);
+      },
+      error: () => this.loading = false
+    });
+  }
+
+  loadReviews(productId: string) {
+    this.reviewService.getReviewsByProductId(productId).subscribe({
+      next: (data) => {
+        this.reviews = data;
+        this.calculateAverageRating();
+        this.loading = false;
+        this.cdr.detectChanges(); // Veri geldiğinde ekranı yenile
+      },
+      error: () => this.loading = false
+    });
+  }
+
+  calculateAverageRating() {
+    if (this.reviews.length === 0) {
+      this.averageRating = 0;
+      return;
+    }
+    const total = this.reviews.reduce((sum, review) => sum + review.rating, 0);
+    this.averageRating = total / this.reviews.length;
+  }
+  
+  // Yıldızları döngüyle oluşturmak için yardımcı metod (HTML'de kullanacağız)
+  getStarArray(rating: number): number[] {
+    return Array(rating).fill(0);
+  }
+
+  scrollToTabs() {
+  const tabElement = document.getElementById('comments-tab');
+  const commentsSection = document.getElementById('comments');
+  
+  if (tabElement && commentsSection) {
+    // 1. Yorumlar sekmesini aktif et (Bootstrap JS simülasyonu)
+    tabElement.click(); 
+    
+    // 2. Oraya yumuşakça kaydır
+    tabElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
 }

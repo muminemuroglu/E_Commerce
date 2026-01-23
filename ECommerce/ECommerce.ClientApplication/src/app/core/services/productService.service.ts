@@ -3,6 +3,7 @@ import { Observable, map } from 'rxjs';
 import { Product } from '../models/product';
 import { ApiResponse } from '../models/apiResponse';
 import { BaseService } from './baseService.service';
+import { Review } from '../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -22,4 +23,6 @@ export class ProductService {
       map(response => response.data)
     );
   }
+
+  
 }

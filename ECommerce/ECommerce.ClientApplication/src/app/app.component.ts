@@ -4,6 +4,9 @@ import { Footer } from './layouts/footer/footer.component';
 import { Navbar } from './layouts/navbar/navbar.component';
 
 
+
+
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Footer, Navbar],
