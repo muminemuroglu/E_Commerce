@@ -13,13 +13,13 @@ import { AuthService } from '../../core/services/auth-service.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  
+
   // DTO ile uyumlu model
   user = {
     firstName: '',
     lastName: '',
     email: '',
-    phoneNumber: '', // Backend DTO'da PhoneNumber
+    phone: '', // Backend DTO'da Phone
     address: '',
     city: '',
     birthDate: '', // Bu Backend DTO'da yoksa eklenmeli veya UI'da pasif kalmalı
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private customerService: CustomerService // Ekle
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadProfile();
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
           this.user.firstName = data.firstName;
           this.user.lastName = data.lastName;
           this.user.email = data.email;
-          this.user.phoneNumber = data.phoneNumber || '';
+          this.user.phone = data.phone || '';
           this.user.address = data.address || '';
           this.user.city = data.city || '';
         }
@@ -59,29 +59,38 @@ export class ProfileComponent implements OnInit {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
-      phoneNumber: this.user.phoneNumber,
-      address: this.user.address,
+      phone: this.user.phone || '',
+      address: this.user.address || '',
       city: this.user.city || 'Belirtilmemiş', // Şehir boş gitmesin
       // UserId'yi göndermiyoruz, Backend token'dan alacak
     };
+    console.log("Gönderilen DTO:", updateDto); // Konsoldan kontrol etmek için yazıldı
 
     this.customerService.updateProfile(updateDto).subscribe({
       next: (res) => {
-        if (res.success) {
-          alert("Bilgileriniz başarıyla güncellendi!");
-          // Navbar'daki ismin güncellenmesi için AuthService'i yenilemek gerekebilir
-          // Veya sayfayı yeniletebilirsin: location.reload();
-        } else {
-          alert(res.message);
+        if (res.success) 
+          {
+            alert("Bilgileriniz başarıyla güncellendi!");
+          } else {
+          // Eğer backend success:false dönüyorsa mesajı göster
+          alert(res?.message || "İşlem başarısız.");
         }
       },
       error: (err) => {
         console.error(err);
-        alert("Güncelleme sırasında hata oluştu.");
+        // Hatanın detayını görmek için:
+        if (err.error && err.error.errors) {
+          // Backend validasyon hatalarını (Hangi alan eksik?) alert ile göster
+          const validationErrors = JSON.stringify(err.error.errors);
+          alert("Hata: " + validationErrors);
+        } else {
+          alert("Güncelleme sırasında hata oluştu.");
+        }
       }
     });
   }
   
+
   onLogout() {
     this.authService.logout();
   }

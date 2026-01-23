@@ -72,7 +72,7 @@ public class CustomerService : ICustomerService
         var customers = await _unitOfWork.Customers.FindWithUserAsync(c =>
             c.User.FirstName.ToLower().Contains(keyword.ToLower()) ||
             c.User.LastName.ToLower().Contains(keyword.ToLower()) ||
-            c.PhoneNumber.Contains(keyword));
+            c.Phone.Contains(keyword));
 
         if (customers == null || !customers.Any())
         {
@@ -91,7 +91,7 @@ public class CustomerService : ICustomerService
 
     user.FirstName = dto.FirstName;
     user.LastName = dto.LastName;
-    // user.Email = dto.Email; // Email değiştirmek genelde ekstra doğrulama ister, şimdilik kapalı tutabiliriz veya açabiliriz.
+    user.Email = dto.Email; // Email değiştirmek genelde ekstra doğrulama ister, şimdilik kapalı tutabiliriz veya açabiliriz.
     
     _unitOfWork.Users.Update(user);
 
@@ -106,7 +106,7 @@ public class CustomerService : ICustomerService
         {
             Id = Guid.NewGuid(),
             UserId = dto.UserId,
-            PhoneNumber = dto.PhoneNumber,
+            Phone = dto.Phone,
             Address = dto.Address,
             City = dto.City,
             Status = true,
@@ -117,7 +117,7 @@ public class CustomerService : ICustomerService
     else
     {
         // Varsa GÜNCELLE
-        customer.PhoneNumber = dto.PhoneNumber;
+        customer.Phone = dto.Phone;
         customer.Address = dto.Address;
         customer.City = dto.City;
         customer.UpdatedDate = DateTime.UtcNow;

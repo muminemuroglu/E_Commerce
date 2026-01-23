@@ -6,9 +6,6 @@
         <a routerLink="/profile" class="list-group-item list-group-item-action active fw-bold border-0 rounded-3 mb-1">
           Üyelik Bilgilerim
         </a>
-        <a routerLink="/addresses" class="list-group-item list-group-item-action border-0 rounded-3 mb-1">
-          Adres Bilgilerim
-        </a>
         <a routerLink="/orders" class="list-group-item list-group-item-action border-0 rounded-3 mb-1">
           Siparişlerim
         </a>
@@ -37,7 +34,7 @@
       <div class="card border-0 p-4 shadow-sm rounded-4">
         <form (ngSubmit)="onSave()">
           
-         <div class="row g-4">
+          <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label fw-bold small text-muted">İsim <span class="text-danger">*</span></label>
               <input type="text" [(ngModel)]="user.firstName" name="firstName" class="form-control form-control-lg bg-light border-0 mb-2" placeholder="Adınız">
@@ -51,14 +48,22 @@
             </div>
 
             <div class="col-md-6">
+              <label class="form-label fw-bold small text-muted">Adres</label>
+              <input type="email" [(ngModel)]="user.address" name="address" class="form-control form-control-lg bg-light border-0">
+            </div>
+
+             <div class="col-md-6">
+              <label class="form-label fw-bold small text-muted">Şehir</label>
+              <input type="email" [(ngModel)]="user.city" name="city" class="form-control form-control-lg bg-light border-0">
+            </div>
+
+            <div class="col-md-6">
               <label class="form-label fw-bold small text-muted">Cep Telefonu</label>
               <div class="input-group">
-                <input type="text" [(ngModel)]="user.phoneNumber" name="phone" class="form-control form-control-lg bg-light border-0" placeholder="(5xx) xxx xx xx">
+                <input type="text" [(ngModel)]="user.phone" name="phone" class="form-control form-control-lg bg-light border-0" placeholder="(5xx) xxx xx xx">
                 <button class="btn btn-secondary" type="button">Doğrula</button>
               </div>
             </div>
-
-           
 
             <div class="col-12 mt-4">
               <div class="form-check">

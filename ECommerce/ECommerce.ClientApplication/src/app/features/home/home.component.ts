@@ -5,6 +5,7 @@ import { ProductService } from '../../core/services/productService.service';
 import { Banner } from '../../core/models/banner';
 import { Product } from '../../core/models/product';
 import { RouterModule} from '@angular/router';
+import { CartService } from '../../core/services/cart-service.service';
 
 declare var bootstrap: any;
 
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     constructor(
         private bannerService: BannerService,
-        private productService: ProductService) { }
+        private productService: ProductService,
+        private cartService: CartService ) { }
 
     ngOnInit(): void {
         // Ürünleri Çek 
@@ -41,7 +43,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
             },
             error: (err) => console.error("Banner servisi hatası:", err)
         });
+
+        
     }
+     addToCart(product: Product) {
+    if (product) {
+      this.cartService.addToCart(product);
+      alert("Ürün sepete eklendi!"); // Şimdilik basit alert, sonra Toast ekleriz
+    }
+  }
+
 
     private initCarousel() {
         setTimeout(() => {
@@ -58,4 +69,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void { }
+
+    
 }
