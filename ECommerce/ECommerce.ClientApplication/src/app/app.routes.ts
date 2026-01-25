@@ -6,6 +6,9 @@ import { RegisterComponent } from './features/register/register.component';
 import { FavoritesComponent } from './features/favorites/favorites.component';
 import { CartComponent } from './features/cart/cart.component';
 import { ProfileComponent } from './features/profile/profile.component';
+import { CheckoutComponent } from './features/checkout/checkout.component';
+import { OrdersComponent } from './features/orders/orders.component';
+import { OrderDetailComponent } from './features/order-detail/order-detail.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent }, // Tarayıcıda localhost:4200 açıldığında Home yüklensin
@@ -14,8 +17,11 @@ export const routes: Routes = [
     {path:'login', component: LoginComponent},
     {path:'register',component: RegisterComponent},
     {path:'favorites',component: FavoritesComponent}, // Favoriler sayfası için rota
-     { path: 'cart', component: CartComponent },
-     { path: 'profile', component: ProfileComponent },
+    { path: 'cart', component: CartComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'checkout', component: CheckoutComponent },
+    { path: 'orders', component: OrdersComponent },
+    { path: 'order-detail/:id', component: OrderDetailComponent },
    
 ];
 

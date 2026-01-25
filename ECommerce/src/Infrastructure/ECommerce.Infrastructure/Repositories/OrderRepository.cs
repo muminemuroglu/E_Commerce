@@ -14,21 +14,21 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
     }
 
     public async Task<IEnumerable<Order>> GetByCustomerIdWithDetailsAsync(Guid customerId, Guid? companyId)
+{
+    var query = _context.Orders
+        .Include(o => o.Customer)
+            .ThenInclude(c => c.User)
+        .Include(o => o.OrderItems)          // <--- EKLE: Sipariş kalemlerini bağla
+            .ThenInclude(oi => oi.Product)   // <--- EKLE: Kalemlerin içindeki ürünleri bağla
+        .Where(o => o.CustomerId == customerId && !o.IsDeleted);
+
+    if (companyId.HasValue)
     {
-        var query = _context.Orders
-            .Include(o => o.Customer)       // Customer tablosunu bağla
-            .ThenInclude(c => c.User)   // Customer içindeki User tablosunu bağla (İsim burada)
-            .Where(o => o.CustomerId == customerId && !o.IsDeleted);
-
-
-        // Eğer bir şirket yöneticisi ise sadece kendi şirketinin siparişlerini görsün
-        if (companyId.HasValue)
-        {
-            query = query.Where(o => o.CompanyId == companyId.Value);
-        }
-
-        return await query.AsNoTracking().ToListAsync();
+        query = query.Where(o => o.CompanyId == companyId.Value);
     }
+
+    return await query.AsNoTracking().ToListAsync();
+}
 
     public async Task<IEnumerable<Order>> GetAllWithDetailsAsync(Guid? companyId)
     {
@@ -41,12 +41,13 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
     }
 
 
-     public async Task<Order?> GetByIdWithDetailsAsync(Guid id)
+public async Task<Order?> GetByIdWithDetailsAsync(Guid id)
 {
     return await _context.Orders
-        .Include(o => o.OrderItems)           // Sipariş kalemlerini (ürünleri) getir
-        .Include(o => o.Customer)             // Müşteriyi getir
-            .ThenInclude(c => c.User)         // Müşteri ismini (User tablosundan) getir
+        .Include(o => o.OrderItems)           // Sipariş kalemlerini getir
+            .ThenInclude(oi => oi.Product)    // <--- BU SATIRI EKLEYİN: Ürün resmine erişmek için şart
+        .Include(o => o.Customer)             
+            .ThenInclude(c => c.User)         
         .FirstOrDefaultAsync(o => o.Id == id);
 }          
 

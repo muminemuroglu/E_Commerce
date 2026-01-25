@@ -3,6 +3,7 @@ import { BaseService } from './baseService.service';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../models/apiResponse';
 import { tap } from 'rxjs';
+import { CartService } from './cart-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   // Kullanıcı bilgisini tutan sinyal
   currentUser = signal<{ name: string, email: string, role: string } | null>(null);
 
-  constructor(private baseService: BaseService, private router: Router) {
+  constructor(private baseService: BaseService, private router: Router, private cartService: CartService) {
     // Sayfa yenilendiğinde Token varsa kullanıcıyı geri yükle
     const token = localStorage.getItem('token');
     if (token) {
@@ -39,6 +40,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.currentUser.set(null);
+    
+    // ÇIKIŞ YAPILDIĞINDA SEPETİ TEMİZLE
+    this.cartService.clearCart(); 
+    
     this.router.navigate(['/']);
   }
 

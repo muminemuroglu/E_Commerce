@@ -12,8 +12,11 @@ export interface CartItem {
 })
 export class CartService {
   updateStorage() {
-    throw new Error('Method not implemented.');
-  }
+  // Mevcut dizinin bir kopyasını alıp tekrar set ediyoruz.
+  // Bu sayede totalPrice ve totalItems (computed sinyalleri) tetiklenir.
+  this.cartItems.set([...this.cartItems()]);
+  this.saveToStorage();
+}
   // Sepetteki ürünleri tutan sinyal
   cartItems = signal<CartItem[]>([]);
 
@@ -54,9 +57,9 @@ export class CartService {
   }
 
   clearCart() {
-    this.cartItems.set([]);
-    this.saveToStorage();
-  }
+  this.cartItems.set([]); // Signal'i boşalt
+  localStorage.removeItem('cart'); // LocalStorage'ı temizle
+}
 
   private saveToStorage() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems()));

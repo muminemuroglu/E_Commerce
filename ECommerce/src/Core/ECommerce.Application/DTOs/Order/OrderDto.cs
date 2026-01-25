@@ -19,6 +19,10 @@ public class OrderDto
     public string CustomerFullName { get; set; } = string.Empty;
     public List<OrderItemDto> OrderItems { get; set; } = new();
 
+     public string ShippingAddress { get; set; } = string.Empty;
+    public string ShippingCity { get; set; } = string.Empty;
+    public string ShippingPhone { get; set; } = string.Empty;
+
     // BaseEntity
     public bool StatusFlag { get; set; } // çakışma olmasın diye isim verdim (aşağıdaki notu oku)
     public bool IsDeleted { get; set; }

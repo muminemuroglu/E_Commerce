@@ -13,31 +13,22 @@ using Microsoft.AspNetCore.Mvc;
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
-
     public OrderController(IOrderService orderService)
     {
         _orderService = orderService;
     }
 
-    /*[HttpGet("List")]
+    [HttpGet("List")]
     public async Task<IActionResult> GetAll()
     {
-        var result = await _orderService.GetAllAsync();
+        var role = User.FindFirstValue(ClaimTypes.Role);
+        var companyIdStr = User.FindFirstValue("companyId");
+        Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
+
+        // OrderService içinde yeni bir metot veya filtreleme ekleyelim
+        var result = await _orderService.GetAllFilteredAsync(companyId, role ?? "");
         return Ok(result);
-    }*/
-
-
-    [HttpGet("List")]
-public async Task<IActionResult> GetAll()
-{
-    var role = User.FindFirstValue(ClaimTypes.Role);
-    var companyIdStr = User.FindFirstValue("companyId");
-    Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
-
-    // OrderService içinde yeni bir metot veya filtreleme ekleyelim
-    var result = await _orderService.GetAllFilteredAsync(companyId, role ?? ""); 
-    return Ok(result);
-}
+    }
 
     [HttpPost("Create")]
     public async Task<IActionResult> Create(OrderCreateDto dto)
@@ -61,8 +52,6 @@ public async Task<IActionResult> GetAll()
         return result.Success ? Ok(result) : BadRequest(result);
     }
 
- 
-
     [HttpGet("Search")]
     public async Task<IActionResult> SearchByNumber([FromQuery] string orderNumber)
     {
@@ -70,14 +59,32 @@ public async Task<IActionResult> GetAll()
         return Ok(result);
     }
 
-[HttpGet("ByCustomer/{customerId}")]
-public async Task<IActionResult> GetByCustomer(Guid customerId)
-{
-    var role = User.FindFirstValue(ClaimTypes.Role);
-    var companyIdStr = User.FindFirstValue("companyId");
-    Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
+    /*
+        [HttpGet("ByCustomer/{customerId}")]
+        public async Task<IActionResult> GetByCustomer(Guid customerId)
+        {
+            var role = User.FindFirstValue(ClaimTypes.Role);
+            var companyIdStr = User.FindFirstValue("companyId");
+            Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
 
-    var result = await _orderService.GetByCustomerIdAsync(customerId, companyId, role ?? "");
-    return Ok(result);
-}
+            var result = await _orderService.GetByCustomerIdAsync(customerId, companyId, role ?? "");
+            return Ok(result);
+        }*/
+
+    [HttpGet("ByCustomer/{customerId}")]
+    public async Task<IActionResult> GetByCustomer(Guid customerId)
+    {
+        var role = User.FindFirstValue(ClaimTypes.Role);
+        var companyIdStr = User.FindFirstValue("companyId");
+        Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
+
+        // Müşteri kendi siparişlerine bakıyorsa CompanyId filtresini kaldırıyoruz
+        if (role == "Customer")
+        {
+            companyId = null;
+        }
+
+        var result = await _orderService.GetByCustomerIdAsync(customerId, companyId, role ?? "");
+        return Ok(result);
+    }
 }
