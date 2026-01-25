@@ -344,7 +344,7 @@ postman_collection.json dosyaları gelecek!!!!!!!!
 ---
 
 ## 👩‍💻 Geliştirici
-**Tuba Nur Şimşek** (Software Developer)
+**Mümine Muroğlu** (Software Developer)
 
 ```bash
 🔗 GitHub: https://github.com/muminemuroglu
