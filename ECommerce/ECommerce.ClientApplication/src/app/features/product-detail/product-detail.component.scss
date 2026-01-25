@@ -24,3 +24,50 @@
   font-weight: 500;
   color: var(--color-gray-500);
 }
+
+
+.nav-tabs {
+  .nav-link {
+    color: var(--color-gray-600);
+    background-color: var(--color-bg-tertiary);
+    border: none;
+    &.active {
+      background-color: #fff;
+      color: var(--color-primary);
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: #fff;
+        z-index: 10;
+      }
+    }
+  }
+}
+
+.comment-item {
+  &:last-child { border-bottom: none !important; }
+}
+
+.rounded-tl-0 { border-top-left-radius: 0 !important; }
+
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.transition-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+// Modal arka planını biraz daha şık yapalım
+.modal-content {
+  overflow: hidden;
+}

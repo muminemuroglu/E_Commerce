@@ -19,16 +19,14 @@ public class CustomerService : ICustomerService
     }
 
     public async Task<ApiResponse<CustomerDto>> GetByIdAsync(Guid id)
-{
-    // ESKİ HALİ: var customer = await _unitOfWork.Customers.GetByIdAsync(id);
-    
-    // YENİ HALİ: User tablosunu dahil eden repository metodunu çağırıyoruz
-    var customer = await _unitOfWork.Customers.GetByIdWithUserAsync(id);
-    
-    if (customer == null) return ApiResponse<CustomerDto>.ErrorResult("Müşteri bulunamadı.");
-    
-    return ApiResponse<CustomerDto>.SuccessResult(_mapper.Map<CustomerDto>(customer));
-}
+    {
+        // User tablosunu dahil eden repository metodunu çağırıyoruz
+        var customer = await _unitOfWork.Customers.GetByIdWithUserAsync(id);
+
+        if (customer == null) return ApiResponse<CustomerDto>.ErrorResult("Müşteri bulunamadı.");
+
+        return ApiResponse<CustomerDto>.SuccessResult(_mapper.Map<CustomerDto>(customer));
+    }
 
     public async Task<ApiResponse<Guid>> CreateAsync(CustomerCreateDto dto)
     {
@@ -42,7 +40,6 @@ public class CustomerService : ICustomerService
     public async Task<ApiResponse<IEnumerable<CustomerDto>>> GetAllAsync(Guid? currentCompanyId, string role)
     {
         IEnumerable<Customer> customers;
-
         if (role == "Admin")
         {
             customers = await _unitOfWork.Customers.GetAllWithUserAsync();
@@ -50,13 +47,11 @@ public class CustomerService : ICustomerService
         else if (role == "CompanyManager" && currentCompanyId.HasValue)
         {
             customers = await _unitOfWork.Customers.GetCustomersByCompanyIdAsync(currentCompanyId.Value);
-            
         }
         else
         {
             return ApiResponse<IEnumerable<CustomerDto>>.SuccessResult(new List<CustomerDto>());
         }
-
         var dtos = _mapper.Map<IEnumerable<CustomerDto>>(customers);
         return ApiResponse<IEnumerable<CustomerDto>>.SuccessResult(dtos);
     }
@@ -127,33 +122,32 @@ public class CustomerService : ICustomerService
     await _unitOfWork.SaveChangesAsync();
     return ApiResponse<bool>.SuccessResult(true, "Profil bilgileri başarıyla güncellendi.");
 }
-
-// Profil sayfasını açtığında verileri doldurmak için:
 public async Task<ApiResponse<CustomerDto>> GetProfileByUserIdAsync(Guid userId)
 {
-    // Kullanıcıya ait müşteri kaydını bul
-    var customer = (await _unitOfWork.Customers.GetByIdWithUserAsync(userId)); // Repository'de UserId'ye göre getiren metod yoksa FindAsync kullanacağız:
+    // ESKİ HATALI KOD: GetByIdWithUserAsync(userId) -> Yanlış! Bu CustomerId bekler.
     
-    // Eğer repository'de özel metod yoksa:
-    // var customer = (await _unitOfWork.Customers.FindWithUserAsync(c => c.UserId == userId)).FirstOrDefault();
-    
+    // YENİ DOĞRU KOD: FindWithUserAsync ile UserId'ye göre arıyoruz.
+    var customers = await _unitOfWork.Customers.FindWithUserAsync(c => c.UserId == userId);
+    var customer = customers.FirstOrDefault();
+
     if (customer == null)
     {
-        // Müşteri kaydı yoksa bile User bilgilerini dönmeliyiz ki form dolsun
+        // Müşteri kaydı yoksa (User var ama Customer tablosuna henüz kayıt düşmemiş)
+        // User bilgilerini çekip dönüyoruz ki form dolsun.
         var user = await _unitOfWork.Users.GetByIdAsync(userId);
-        if(user == null) return ApiResponse<CustomerDto>.ErrorResult("Kullanıcı bulunamadı");
+        if (user == null) return ApiResponse<CustomerDto>.ErrorResult("Kullanıcı bulunamadı");
 
-        return ApiResponse<CustomerDto>.SuccessResult(new CustomerDto 
-        { 
-            FirstName = user.FirstName, 
-            LastName = user.LastName, 
+        return ApiResponse<CustomerDto>.SuccessResult(new CustomerDto
+        {
+            // Frontend'de kontrol ederken ID'nin boş gelmesi önemli
+            // Id = Guid.Empty, 
+            FirstName = user.FirstName,
+            LastName = user.LastName,
             Email = user.Email,
             UserId = user.Id
-            // Telefon ve Adres boş dönecek
         });
     }
 
     return ApiResponse<CustomerDto>.SuccessResult(_mapper.Map<CustomerDto>(customer));
 }
 }
-

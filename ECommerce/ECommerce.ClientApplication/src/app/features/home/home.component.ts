@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BannerService } from '../../core/services/bannerService.service';
 import { ProductService } from '../../core/services/productService.service';
@@ -14,13 +14,15 @@ declare var bootstrap: any;
     standalone: true,
     imports: [CommonModule,RouterModule],
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Default
 })
 export class HomeComponent implements OnInit, AfterViewInit {
     banners: Banner[] = [];
     products: Product[] = [];
 
     constructor(
+        private cdr: ChangeDetectorRef,
         private bannerService: BannerService,
         private productService: ProductService,
         private cartService: CartService ) { }
@@ -65,6 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 });
                 carousel.cycle(); // Manuel olarak döngüyü başlat
             }
+             this.cdr.detectChanges();
         }, 300); // Süreyi biraz artırdık ki DOM tam yerleşsin
     }
 
