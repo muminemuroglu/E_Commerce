@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./product-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class ProductDetail implements OnInit {
+export class ProductDetailComponent implements OnInit {
   product?: Product;
   reviews: Review[] = []; // Yorumları tutacak dizi
   averageRating: number = 0; // Ortalama puan
