@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using ECommerce.Application.DTOs.Product;
 using ECommerce.Application.Responses;
 
@@ -14,6 +15,6 @@ public interface IProductService
     
     // Yönerge Gereği: Arama ve Şirket bazlı filtreleme
     Task<ApiResponse<IEnumerable<ProductDto>>> GetByCompanyIdAsync(Guid companyId);
-
     Task<ApiResponse<IEnumerable<ProductDto>>> GetFeaturedProductsAsync();
-}
+    Task<ApiResponse<ProductListResponseDto>> GetFilteredProductsAsync(ProductFilterDto filter);
+    }

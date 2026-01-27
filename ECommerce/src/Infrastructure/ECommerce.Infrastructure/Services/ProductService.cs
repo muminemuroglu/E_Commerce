@@ -5,6 +5,7 @@ using ECommerce.Application.Interfaces;
 using ECommerce.Application.Responses;
 using ECommerce.Domain.Entities;
 using ECommerce.Domain.Interfaces;
+using ECommerce.Domain.Models;
 
 namespace ECommerce.Infrastructure.Services;
 
@@ -18,7 +19,6 @@ public class ProductService : IProductService
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-
     public async Task<ApiResponse<IEnumerable<ProductDto>>> GetAllAsync()
     {
         // Veritabanından hem Category hem de Brand bilgilerini tek seferde çekiyoruz
@@ -29,8 +29,6 @@ public class ProductService : IProductService
 
         return ApiResponse<IEnumerable<ProductDto>>.SuccessResult(dtos);
     }
-
-
     public async Task<ApiResponse<ProductDto>> GetByIdAsync(Guid id)
     {
         var product = await _unitOfWork.Products.GetByIdAsync(id);
@@ -39,6 +37,7 @@ public class ProductService : IProductService
         var dto = _mapper.Map<ProductDto>(product);
         return ApiResponse<ProductDto>.SuccessResult(dto);
     }
+
     public async Task<ApiResponse<IEnumerable<ProductDto>>> SearchAsync(string keyword)
     {
         if (string.IsNullOrWhiteSpace(keyword))
@@ -63,7 +62,6 @@ public class ProductService : IProductService
         var product = _mapper.Map<Product>(dto);
         await _unitOfWork.Products.AddAsync(product);
         await _unitOfWork.SaveChangesAsync();
-
         return ApiResponse<Guid>.SuccessResult(product.Id, "Ürün başarıyla eklendi.");
     }
 
@@ -95,23 +93,59 @@ public class ProductService : IProductService
     public async Task<ApiResponse<IEnumerable<ProductDto>>> GetByCompanyIdAsync(Guid companyId)
     {
         // Veritabanından hem Category hem de Brand bilgilerini tek seferde çekiyoruz
-        
-        var products = await _unitOfWork.Products.GetByCompanyIdListAsync(companyId);
+        var products = await _unitOfWork.Products.GetByCompanyIdListAsync(companyId); //repostoryde metodu overide ettik
         var dtos = _mapper.Map<IEnumerable<ProductDto>>(products);
         return ApiResponse<IEnumerable<ProductDto>>.SuccessResult(dtos);
     }
 
     public async Task<ApiResponse<IEnumerable<ProductDto>>> GetFeaturedProductsAsync()
+    {
+        var products = await _unitOfWork.Products.FindAsync(x => x.IsFeatured && !x.IsDeleted);
+        var dtos = _mapper.Map<IEnumerable<ProductDto>>(products);
+        return ApiResponse<IEnumerable<ProductDto>>.SuccessResult(dtos);
+    }
+
+
+      public async Task<ApiResponse<ProductListResponseDto>> GetFilteredProductsAsync(ProductFilterDto dto)
 {
-    var products = await _unitOfWork.Products.FindAsync(x => x.IsFeatured && !x.IsDeleted);
-    var dtos = _mapper.Map<IEnumerable<ProductDto>>(products);
-    return ApiResponse<IEnumerable<ProductDto>>.SuccessResult(dtos);
+    // 1. DTO'yu Domain Nesnesine (Params) Çevir
+    var filterParams = new ProductFilterParams
+    {
+        CategoryId = dto.CategoryId,
+        BrandIds = dto.BrandIds,
+        MinPrice = dto.MinPrice,
+        MaxPrice = dto.MaxPrice,
+        Keyword = dto.Keyword,
+        IsFreeShipping = dto.IsFreeShipping,
+        IsFastDelivery = dto.IsFastDelivery,
+        SortBy = dto.SortBy,
+        PageNumber = dto.PageNumber,
+        PageSize = dto.PageSize
+    };
+
+    // 2. Repository'i çağır
+    var (products, totalCount) = await _unitOfWork.Products.GetFilteredAsync(filterParams);
+    
+    // 3. Marka İstatistiklerini Hesapla (Sol panel için)
+    var brandStats = products
+        .GroupBy(p => p.Brand)
+        .Select(g => new BrandFilterDto 
+        { 
+            Id = g.Key.Id, 
+            Name = g.Key.Name, 
+            Count = g.Count() 
+        }).ToList();
+
+    // 4. Sonucu Hazırla
+    var result = new ProductListResponseDto
+    {
+        Products = _mapper.Map<IEnumerable<ProductDto>>(products),
+        TotalCount = totalCount,
+        AvailableBrands = brandStats,
+        MinPrice = products.Any() ? products.Min(p => p.Price) : 0,
+        MaxPrice = products.Any() ? products.Max(p => p.Price) : 0
+    };
+
+    return ApiResponse<ProductListResponseDto>.SuccessResult(result);
 }
-
-
-    
-
-    
-
-
 }

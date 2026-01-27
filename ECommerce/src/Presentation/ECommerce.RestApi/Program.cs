@@ -10,6 +10,7 @@ using ECommerce.Application.Helpers;
 using ECommerce.RestApi;
 using ECommerce.RestApi.Authorization;
 using Serilog;
+using ECommerce.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,6 +84,28 @@ builder.Services.AddOpenApi();
 
 
 var app = builder.Build();
+
+// --- DATA SEEDING (ektra görsellik için seed data ekleme) ---
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        // Veritabanı yoksa oluştur (Migration varsa MigrateAsync kullanmak daha iyidir)
+        await context.Database.MigrateAsync(); 
+        
+        // Verileri ekle
+        await ECommerce.Infrastructure.Data.SeedData.InitializeAsync(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Veritabanı doldurulurken bir hata oluştu.");
+    }
+}
+// ----------------------------------
+
 
 // Swagger UI Active
 if (app.Environment.IsDevelopment())

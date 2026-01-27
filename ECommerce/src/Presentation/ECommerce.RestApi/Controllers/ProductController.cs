@@ -19,9 +19,9 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
 
-    //Ürünleri giriş yapmayanlarda görebilsin diye olan metod
-    [HttpGet("ListAll")]
-    [AllowAnonymous] // Ürünleri giriş yapmayanlar da görebilsin
+
+    [HttpGet("ListAll")] //Ürünleri giriş yapmayanlarda görebilsin diye olan metod
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllProduct()
     {
         var result = await _productService.GetAllAsync();
@@ -29,29 +29,29 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("List")]
-public async Task<IActionResult> GetAll()
-{
-    // 1. Kullanıcının rolünü alalım
-    var userRole = User.FindFirstValue(ClaimTypes.Role);
-    
-    // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
-    if (userRole == "Admin")
+    public async Task<IActionResult> GetAll()
     {
-        var result = await _productService.GetAllAsync();
-        return Ok(result);
-    }
+        // 1. Kullanıcının rolünü alalım
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
 
-    // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
-    var companyIdStr = User.FindFirstValue("companyId");
-    if (Guid.TryParse(companyIdStr, out Guid companyId))
-    {
-        var result = await _productService.GetByCompanyIdAsync(companyId);
-        return Ok(result);
-    }
+        // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
+        if (userRole == "Admin")
+        {
+            var result = await _productService.GetAllAsync();
+            return Ok(result);
+        }
 
-    // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
-    return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResult(new List<ProductDto>()));
-}
+        // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
+        var companyIdStr = User.FindFirstValue("companyId");
+        if (Guid.TryParse(companyIdStr, out Guid companyId))
+        {
+            var result = await _productService.GetByCompanyIdAsync(companyId);
+            return Ok(result);
+        }
+
+        // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
+        return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResult(new List<ProductDto>()));
+    }
 
 
     [HttpGet("GetById/{id}")]
@@ -74,7 +74,7 @@ public async Task<IActionResult> GetAll()
     [Authorize(Policy = "CompanyIsolation")] // Şirket bazlı koruma
     public async Task<IActionResult> GetByCompany(Guid companyId)
     {
-        
+
         var result = await _productService.GetByCompanyIdAsync(companyId);
         return Ok(result);
     }
@@ -108,11 +108,20 @@ public async Task<IActionResult> GetAll()
         return result.Success ? Ok(result) : BadRequest(result);
     }
 
+
     [HttpGet("Featured")]
     [AllowAnonymous]
     public async Task<IActionResult> GetFeaturedProducts()
     {
         var result = await _productService.GetFeaturedProductsAsync();
+        return Ok(result);
+    }
+
+    [HttpGet("Filter")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Filter([FromQuery] ProductFilterDto filter)
+    {
+        var result = await _productService.GetFilteredProductsAsync(filter);
         return Ok(result);
     }
 }

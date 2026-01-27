@@ -9,18 +9,16 @@ public class Product : BaseEntity
     public decimal Price { get; set; }
     public int Stock { get; set; }
     public string? ImageUrl { get; set; }
-
-    public bool IsFeatured { get; set; }
-    public bool IsFreeShipping { get; set; }
-    public bool IsFastDelivery { get; set; }
+     public bool IsFeatured { get; set; } = true;
+    public decimal? DiscountPrice { get; set; } // İndirimli fiyat
+    public bool IsFreeShipping { get; set; } // Ücretsiz kargo
+    public bool IsFastDelivery { get; set; } // Hızlı teslimat
 
     // İlişkiler
     public Guid CategoryId { get; set; }
-    public Category Category { get; set; } = null!;
-
+    public Category Category { get; set; } = null!; 
     public Guid CompanyId { get; set; }
     public Company Company { get; set; } = null!;
-
     public Guid BrandId { get; set; }
     public Brand Brand { get; set; } = null!;
 }

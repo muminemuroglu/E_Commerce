@@ -1,10 +1,9 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { RouterModule } from '@angular/router';
 import { OrderService } from '../../core/services/order-service.service';
 import { CustomerService } from '../../core/services/customer-service.service';
-import { Router, RouterModule } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-orders',
@@ -17,7 +16,6 @@ import { Router, RouterModule } from '@angular/router';
 export class OrdersComponent implements OnInit {
   orders: any[] = [];
   loading = true;
-  product: any;
 
   constructor(
     private cdr: ChangeDetectorRef,
