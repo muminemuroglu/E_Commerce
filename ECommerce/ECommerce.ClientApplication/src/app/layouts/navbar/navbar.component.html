@@ -35,11 +35,14 @@
         </li>
      </ul>
 
-      <div class="d-flex align-items-center gap-3">
-        <div class="search-box d-none d-xl-flex">
-          <i class="bi bi-search"></i>
-          <input type="text" placeholder="Ürün ara..." />
-        </div>
+      <div class="search-box d-none d-xl-flex">
+  <i class="bi bi-search" (click)="onSearch()" style="cursor: pointer;"></i>
+  
+     <input type="text" 
+         [(ngModel)]="searchKeyword" 
+         (keyup.enter)="onSearch()" 
+         placeholder="Ürün ara..." />
+     </div>
 
         <a
           routerLink="/cart"
@@ -123,7 +126,6 @@
         }
       </div>
     </div>
-  </div>
 </nav>
 
 
