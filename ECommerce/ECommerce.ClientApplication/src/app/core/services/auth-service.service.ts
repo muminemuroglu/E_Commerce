@@ -88,9 +88,38 @@ export class AuthService {
   return this.baseService.post<ApiResponse<boolean>>('Auth/UpdateProfile', userDto);
 }
 
-changePassword(data: any) {
-  // DTO'ya UserId eklemek gerekebilir, backend kontrolüne göre
-  // const payload = { ...data, userId: this.getUserIdFromToken() }; 
-  return this.baseService.post<ApiResponse<boolean>>('Auth/ChangePassword', data);
+
+
+getUserIdFromToken(): string | null {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+  
+  try {
+    const payloadBase64 = token.split('.')[1];
+    const payloadJson = atob(payloadBase64);
+    const payload = JSON.parse(payloadJson);
+    // ClaimTypes.NameIdentifier genelde "sub" veya uzun URL olarak gelir
+    // Backend token üretirken hangi claim'i kullandığına bağlı
+    return payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || payload['sub'] || null;
+  } catch (error) {
+    return null;
+  }
+}
+
+changePassword(data: { currentPassword: string, newPassword: string }) {
+  const userId = this.getUserIdFromToken();
+  if (!userId) {
+    // Kullanıcı ID'si bulunamazsa hata dön veya logout yap
+    throw new Error("Kullanıcı kimliği doğrulanamadı.");
+  }
+
+  // Backend'in beklediği tam DTO formatı
+  const requestBody = {
+    userId: userId,
+    currentPassword: data.currentPassword,
+    newPassword: data.newPassword
+  };
+
+  return this.baseService.post<ApiResponse<boolean>>('Auth/ChangePassword', requestBody);
 }
 }

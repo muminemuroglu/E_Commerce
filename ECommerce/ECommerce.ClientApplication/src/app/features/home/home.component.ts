@@ -6,6 +6,8 @@ import { Banner } from '../../core/models/banner';
 import { Product } from '../../core/models/product';
 import { RouterModule} from '@angular/router';
 import { CartService } from '../../core/services/cart-service.service';
+import { CategoryService } from '../../core/services/category-service.service';
+import { Category } from '../../core/models/category';
 
 declare var bootstrap: any;
 
@@ -20,12 +22,17 @@ declare var bootstrap: any;
 export class HomeComponent implements OnInit, AfterViewInit {
     banners: Banner[] = [];
     products: Product[] = [];
+    categories: Category[] = []; // EKLEDİM
+cat: any;
+    
 
     constructor(
         private cdr: ChangeDetectorRef,
         private bannerService: BannerService,
         private productService: ProductService,
-        private cartService: CartService ) { }
+        private cartService: CartService,
+        private categoryService: CategoryService
+     ) { }
 
     ngOnInit(): void {
         // Ürünleri Çek 
@@ -45,8 +52,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
             },
             error: (err) => console.error("Banner servisi hatası:", err)
         });
+        // Kategorileri çek (Navbar'daki gibi)
+        this.categoryService.getCategories().subscribe({
+            next: (res) => {
+                this.categories = res.data || [];
+                this.cdr.detectChanges();
+            }
+        });
 
         
+
+        
+    }
+
+    // Navbar'daki ikon fonksiyonunun aynısını buraya koyuyoruz
+    getCategoryIcon(name: string): string {
+        const lowerName = name.toLowerCase();
+        if (lowerName.includes('telefon')) return 'bi-phone';
+        if (lowerName.includes('bilgisayar')) return 'bi-laptop';
+        if (lowerName.includes('tv') || lowerName.includes('ses')) return 'bi-tv';
+        if (lowerName.includes('ev') || lowerName.includes('alet')) return 'bi-house-heart';
+        if (lowerName.includes('aksesuar')) return 'bi-headphones';
+        if (lowerName.includes('kamera')) return 'bi-camera';
+        if (lowerName.includes('saat')) return 'bi-watch';
+        return 'bi-grid';
     }
      addToCart(product: Product) {
     if (product) {

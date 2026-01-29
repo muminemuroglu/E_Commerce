@@ -10,6 +10,8 @@ import { CheckoutComponent } from './features/checkout/checkout.component';
 import { OrdersComponent } from './features/orders/orders.component';
 import { OrderDetailComponent } from './features/order-detail/order-detail.component';
 import { ProductListComponent } from './features/product-list/product-list.component';
+import { CategoryListComponent } from './features/category-list/category-list.component';
+import { ChangePasswordComponent } from './features/profile/change-password/change-password.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent }, // Tarayıcıda localhost:4200 açıldığında Home yüklensin
@@ -23,7 +25,9 @@ export const routes: Routes = [
     { path: 'checkout', component: CheckoutComponent },
     { path: 'orders', component: OrdersComponent },
     { path: 'order-detail/:id', component: OrderDetailComponent },
-    {path:'products', component: ProductListComponent} // Ürünler sayfası için rota
-   
+    {path:'products', component: ProductListComponent}, // Ürünler sayfası için rota
+   { path: 'categories', component: CategoryListComponent }, // Kategoriler sayfası için rota
+   { path: 'change-password', component: ChangePasswordComponent }
+
 ];
 

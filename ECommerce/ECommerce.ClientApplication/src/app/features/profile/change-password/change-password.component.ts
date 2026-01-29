@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service.service';
+
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './change-password.component.html'
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent {
-  passObj = {
+  
+  passwordData = {
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
@@ -18,24 +22,42 @@ export class ChangePasswordComponent {
 
   constructor(private authService: AuthService) {}
 
-  onChangePassword() {
-    if (this.passObj.newPassword !== this.passObj.confirmPassword) {
-      alert("Yeni şifreler uyuşmuyor!");
+  onSubmit() {
+    // 1. Basit Validasyonlar
+    if (!this.passwordData.currentPassword || !this.passwordData.newPassword) {
+      alert("Lütfen tüm alanları doldurunuz.");
       return;
     }
 
-    // Backend ChangePasswordDto bekliyor (UserId, CurrentPassword, NewPassword)
-    // UserId'yi serviste token'dan okuyup ekleyebiliriz veya burada ekleriz.
-    // Şimdilik servise paslıyoruz.
-    this.authService.changePassword(this.passObj).subscribe({
+    if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
+      alert("Yeni şifreler birbiriyle uyuşmuyor!");
+      return;
+    }
+
+    if (this.passwordData.newPassword.length < 6) {
+      alert("Yeni şifreniz en az 6 karakter olmalıdır.");
+      return;
+    }
+
+    // 2. Servise İstek At
+    this.authService.changePassword(this.passwordData).subscribe({
       next: (res) => {
         if (res.success) {
-          alert("Şifreniz başarıyla değiştirildi. Lütfen tekrar giriş yapın.");
-          this.authService.logout();
+          alert("Şifreniz başarıyla güncellendi!");
+          // Formu temizle
+          this.passwordData = { currentPassword: '', newPassword: '', confirmPassword: '' };
         } else {
-          alert(res.message);
+          alert(res.message || "İşlem başarısız.");
         }
+      },
+      error: (err) => {
+        console.error(err);
+        alert(err.error?.message || "Şifre değiştirilemedi. Mevcut şifrenizi kontrol ediniz.");
       }
     });
+  }
+  
+  onLogout() {
+    this.authService.logout();
   }
 }
