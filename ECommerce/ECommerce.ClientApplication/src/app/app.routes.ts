@@ -12,6 +12,10 @@ import { OrderDetailComponent } from './features/order-detail/order-detail.compo
 import { ProductListComponent } from './features/product-list/product-list.component';
 import { CategoryListComponent } from './features/category-list/category-list.component';
 import { ChangePasswordComponent } from './features/profile/change-password/change-password.component';
+import { NotfoundComponent } from './features/error-page/notfound/notfound.component';
+import { ServerErrorComponent } from './features/error-page/server-error/server-error.component';
+import { authGuard } from './auth.guard';
+
 
 export const routes: Routes = [
     { path: '', component: HomeComponent }, // Tarayıcıda localhost:4200 açıldığında Home yüklensin
@@ -19,15 +23,18 @@ export const routes: Routes = [
     { path: 'product/:id', component: ProductDetailComponent }, // Dinamik ID ile rota
     {path:'login', component: LoginComponent},
     {path:'register',component: RegisterComponent},
-    {path:'favorites',component: FavoritesComponent}, // Favoriler sayfası için rota
+    {path:'favorites',component: FavoritesComponent,canActivate: [authGuard]}, // Favoriler sayfası için rota
     { path: 'cart', component: CartComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent ,canActivate: [authGuard]},
     { path: 'checkout', component: CheckoutComponent },
     { path: 'orders', component: OrdersComponent },
     { path: 'order-detail/:id', component: OrderDetailComponent },
     {path:'products', component: ProductListComponent}, // Ürünler sayfası için rota
    { path: 'categories', component: CategoryListComponent }, // Kategoriler sayfası için rota
-   { path: 'change-password', component: ChangePasswordComponent }
+   { path: 'change-password', component: ChangePasswordComponent,canActivate: [authGuard] },
+   { path: 'server-error', component: ServerErrorComponent }, //Server error sayfası için rota
+   { path: '**', component: NotfoundComponent }// 404 sayfası için rota
+  
 
 ];
 
