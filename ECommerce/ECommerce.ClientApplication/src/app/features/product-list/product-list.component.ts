@@ -10,12 +10,13 @@ import { ProductService } from '../../core/services/productService.service';
 import { CartService } from '../../core/services/cart-service.service';
 import { ProductFilterParams } from '../../core/models/productFilterParams';
 import { BrandFilter } from '../../core/models/brandFilter';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule,ImageUrlPipe],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default

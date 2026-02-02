@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { OrderService } from '../../core/services/order-service.service';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 
 
 @Component({
   selector: 'app-order-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ImageUrlPipe],
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.scss']
 })

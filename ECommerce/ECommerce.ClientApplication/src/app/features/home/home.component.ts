@@ -8,13 +8,14 @@ import { RouterModule} from '@angular/router';
 import { CartService } from '../../core/services/cart-service.service';
 import { CategoryService } from '../../core/services/category-service.service';
 import { Category } from '../../core/models/category';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 
 declare var bootstrap: any;
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [CommonModule,RouterModule],
+    imports: [CommonModule,RouterModule,ImageUrlPipe],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     changeDetection: ChangeDetectionStrategy.Default

@@ -1,12 +1,125 @@
 {
   "Version": 1,
-  "Hash": "fxX2eu/jE1HZEvwU4BcwnuiPX/3bTfGdQo2NJZNduDQ=",
+  "Hash": "UVFJOI8HNDfdAuNsnPLSXIInJ/hdnIrOLjoWpo9REI0=",
   "Source": "ECommerce.RestApi",
   "BasePath": "_content/ECommerce.RestApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "ECommerce.RestApi/wwwroot",
+      "Source": "ECommerce.RestApi",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hzsuxnwf2s",
+      "Integrity": "w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.hzsuxnwf2s.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "156751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 01 Feb 2026 12:12:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hzsuxnwf2s"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "156751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 01 Feb 2026 12:12:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4="
+        }
+      ]
+    }
+  ]
 }

@@ -14,7 +14,7 @@
             </button>
 
             <div class="p-3 text-center" style="cursor: pointer" [routerLink]="['/product', product.id]">
-              <img [src]="product.imageUrl" class="img-fluid" style="height: 180px; object-fit: contain;">
+              <img [src]="product.imageUrl| imageUrl" class="img-fluid" style="height: 180px; object-fit: contain;">
             </div>
 
             <div class="card-body">

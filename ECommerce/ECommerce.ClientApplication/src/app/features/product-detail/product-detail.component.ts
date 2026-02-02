@@ -10,12 +10,13 @@ import { FavoriteService } from '../../core/services/favorite-service.service';
 import { AuthService } from '../../core/services/auth-service.service';
 import { CustomerService } from '../../core/services/customer-service.service';
 import { FormsModule } from '@angular/forms';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,ImageUrlPipe],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default

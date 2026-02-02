@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartItem, CartService } from '../../core/services/cart-service.service';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,ImageUrlPipe],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
