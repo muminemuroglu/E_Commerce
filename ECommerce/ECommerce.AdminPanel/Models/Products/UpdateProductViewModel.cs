@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.AdminPanel.Models.Products;
-
 public class UpdateProductViewModel
 {
     [Required]
@@ -20,7 +19,12 @@ public class UpdateProductViewModel
     public Guid BrandId { get; set; }
 
     [Required]
-    public Guid CompanyId { get; set; }
+    public Guid CompanyId { get; set; } 
+    public string? ImageUrl { get; set; }
+    public List<IFormFile>? Files { get; set; }
+
+    // Mevcut Resimlerin URL Listesi (Görüntüleme için)
+    public List<string> ExistingImages { get; set; } = new List<string>();
 
     [Required(ErrorMessage = "Fiyat zorunludur.")]
     [Range(0.01, double.MaxValue, ErrorMessage = "Fiyat 0'dan büyük olmalıdır.")]
@@ -29,8 +33,4 @@ public class UpdateProductViewModel
     [Required(ErrorMessage = "Stok zorunludur.")]
     [Range(0, int.MaxValue, ErrorMessage = "Stok negatif olamaz.")]
     public int Stock { get; set; }
-
-    public string? ImageUrl { get; set; }
-
-
 }

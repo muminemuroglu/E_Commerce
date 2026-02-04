@@ -29,9 +29,22 @@ public class ProductService : IProductService
 
         return ApiResponse<IEnumerable<ProductDto>>.SuccessResult(dtos);
     }
-    public async Task<ApiResponse<ProductDto>> GetByIdAsync(Guid id)
+
+    /*public async Task<ApiResponse<ProductDto>> GetByIdAsync(Guid id)
     {
         var product = await _unitOfWork.Products.GetByIdAsync(id);
+        if (product == null) return ApiResponse<ProductDto>.ErrorResult("Ürün bulunamadı.");
+
+        var dto = _mapper.Map<ProductDto>(product);
+        return ApiResponse<ProductDto>.SuccessResult(dto);
+    }*/
+
+    public async Task<ApiResponse<ProductDto>> GetByIdAsync(Guid id)
+    {
+        // Eski: var product = await _unitOfWork.Products.GetByIdAsync(id);
+        // Yeni: Özel metodumuzu çağırıyoruz
+        var product = await _unitOfWork.Products.GetByIdWithImagesAsync(id);
+
         if (product == null) return ApiResponse<ProductDto>.ErrorResult("Ürün bulunamadı.");
 
         var dto = _mapper.Map<ProductDto>(product);
@@ -110,19 +123,62 @@ public class ProductService : IProductService
         return ApiResponse<Guid>.SuccessResult(product.Id, "Ürün ve görseller başarıyla eklendi.");
     }
 
-    public async Task<ApiResponse<bool>> UpdateAsync(Guid id, ProductUpdateDto dto)
+public async Task<ApiResponse<bool>> UpdateAsync(Guid id, ProductUpdateDto dto)
+{
+    // IMPORTANT: GetByIdWithImagesAsync kesinlikle TRACKED dönmeli (AsNoTracking OLMAMALI)
+    var product = await _unitOfWork.Products.GetByIdWithImagesAsync(id);
+
+    if (product == null)
+        return ApiResponse<bool>.ErrorResult("Güncellenecek ürün bulunamadı.");
+
+    // DTO -> Entity
+    _mapper.Map(dto, product);
+    product.UpdatedDate = DateTime.UtcNow;
+
+    // --- YENİ RESİM YÜKLEME ---
+    if (dto.ImageFiles is { Count: > 0 })
     {
-        var product = await _unitOfWork.Products.GetByIdAsync(id);
-        if (product == null) return ApiResponse<bool>.ErrorResult("Güncellenecek ürün bulunamadı.");
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "products");
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
 
-        _mapper.Map(dto, product); // DTO'daki verileri mevcut entity üzerine yazar
-        product.UpdatedDate = DateTime.UtcNow;
+        foreach (var file in dto.ImageFiles)
+        {
+            if (file is null || file.Length <= 0) continue;
 
-        _unitOfWork.Products.Update(product);
-        await _unitOfWork.SaveChangesAsync();
+            var uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-        return ApiResponse<bool>.SuccessResult(true, "Ürün güncellendi.");
+            await using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            var dbPath = $"/images/products/{uniqueFileName}";
+
+            // NEW IMAGE -> EF bunu Added olarak takip etmeli.
+            product.ProductImages.Add(new ProductImage
+            {
+                // BaseEntity Id set ediliyorsa burayı kaldırabilirsin.
+                Id = Guid.NewGuid(),
+
+                ProductId = product.Id, // ✅ önemli
+                ImageUrl = dbPath,
+                IsMain = false,
+                Status = true,
+                CreatedDate = DateTime.UtcNow,
+                UpdatedDate = DateTime.UtcNow
+            });
+        }
     }
+
+    // ❌ BUNU KALDIRIYORUZ: _unitOfWork.Products.Update(product);
+    // Çünkü Update(entity) tüm navigation graph’ı Modified yapar ve yeni resimlere UPDATE çakar.
+
+    await _unitOfWork.SaveChangesAsync();
+
+    return ApiResponse<bool>.SuccessResult(true, "Ürün güncellendi.");
+}
 
     public async Task<ApiResponse<bool>> DeleteAsync(Guid id)
     {

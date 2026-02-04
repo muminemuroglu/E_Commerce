@@ -1,10 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Application.DTOs.Product;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+
 public class ProductUpdateDto
 {
-    
-
     [Required(ErrorMessage = "Ürün adı zorunludur.")]
     [MaxLength(150)]
     public string Name { get; set; } = string.Empty;
@@ -28,6 +28,7 @@ public class ProductUpdateDto
 
     [Required(ErrorMessage = "Marka ID zorunludur.")]
     public Guid BrandId { get; set; }
-    
     public string? ImageUrl { get; set; }
+    // Tekil IFormFile yerine List yapıyoruz
+    public List<IFormFile>? ImageFiles { get; set; }
 }

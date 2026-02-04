@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { OrderService } from '../../core/services/order-service.service';
 import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
+import { OrderService } from '../../core/services/order-service.service';
 
 
 @Component({
@@ -10,7 +10,8 @@ import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
   standalone: true,
   imports: [CommonModule, RouterModule, ImageUrlPipe],
   templateUrl: './order-detail.component.html',
-  styleUrls: ['./order-detail.component.scss']
+  styleUrls: ['./order-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class OrderDetailComponent implements OnInit {
   order: any;
@@ -18,7 +19,8 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class OrderDetailComponent implements OnInit {
         next: (res) => {
           this.order = res.data;
           this.loading = false;
+          this.cdr.detectChanges();
         },
         error: () => this.loading = false
       });

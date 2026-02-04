@@ -24,7 +24,7 @@
       @for (banner of banners; track banner.id; let i = $index) {
       <div class="carousel-item" [class.active]="i === 0" data-bs-interval="3000">
         <a [href]="banner.targetUrl || '#'" class="d-block banner-link">
-          <img [src]="banner.imageUrl | imageUrl " class="d-block w-100 banner-img" [alt]="banner.title" />
+          <img [src]="banner.imageUrl" class="d-block w-100 banner-img" [alt]="banner.title" />
         </a>
       </div>
       }
@@ -79,9 +79,10 @@
             [src]="product.imageUrl | imageUrl"
             class="img-fluid"
             [alt]="product.name"
-            style="height: 160px; object-fit: contain"
+            style="height: 180px; object-fit: contain"
           />
         </div>
+        
 
         <div class="product-info">
           <h6 class="product-title text-truncate-2 mb-2" style="font-size: 0.85rem; height: 38px">
@@ -109,7 +110,7 @@
   </div>
 </div>
 
-<!---------------------altta Kategoriler-------------------------->
+<!---------------------alttaki dekor amaçlı Kategoriler-------------------------->
 <section class="quick-categories mb-4 mt-5">
   <div class="container">
     <div
@@ -160,7 +161,7 @@
         } @for (brand of brands; track $index) {
         <div class="brand-item px-4">
           <img
-            [src]="brand.logo| imageUrl"
+            [src]="brand.logo"
             [alt]="brand.name"
             class="img-fluid"
             style="max-height: 40px; opacity: 0.7; filter: grayscale(100%); transition: all 0.3s"

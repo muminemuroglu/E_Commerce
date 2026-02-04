@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UVFJOI8HNDfdAuNsnPLSXIInJ/hdnIrOLjoWpo9REI0=",
+  "Hash": "31RfDOUjSQ1wjYLe2cFx+wLNfVqTv6UXtK9sm7A41WY=",
   "Source": "ECommerce.RestApi",
   "BasePath": "_content/ECommerce.RestApi",
   "Mode": "Default",
@@ -16,6 +16,69 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.webp",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cenkvq9dff",
+      "Integrity": "dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.webp"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.jpeg",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kug9hcv4gp",
+      "Integrity": "jA5KI9R5aY80xaDqAw7C+2b5p9L11RqYTI4Fuhi15n4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.jpeg"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.webp",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cenkvq9dff",
+      "Integrity": "dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.webp"
+    },
     {
       "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg",
       "SourceId": "ECommerce.RestApi",
@@ -36,9 +99,402 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.jpeg",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x7qe6hc2wf",
+      "Integrity": "w5l5Q/HU+9GXdZCqDG0Y0h6LZoewrDGk1FAuyhM7cI8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.jpeg"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.webp",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cenkvq9dff",
+      "Integrity": "dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.webp"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.webp",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cenkvq9dff",
+      "Integrity": "dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.webp"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.jpeg",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hzsuxnwf2s",
+      "Integrity": "w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.jpeg"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.webp",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cenkvq9dff",
+      "Integrity": "dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.webp"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.jpeg",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x41lk7qqdw",
+      "Integrity": "ASnBh+vkn691UdiK/aDvhowjRCPvGc0Ia1y+Ur8n82U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.jpeg"
+    },
+    {
+      "Identity": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.webp",
+      "SourceId": "ECommerce.RestApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/",
+      "BasePath": "_content/ECommerce.RestApi",
+      "RelativePath": "images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cenkvq9dff",
+      "Integrity": "dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.webp"
     }
   ],
   "Endpoints": [
+    {
+      "Route": "images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.cenkvq9dff.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:27:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cenkvq9dff"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/150c268c-a8a3-410d-9bd6-92216b82230e_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:27:11 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41006"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jA5KI9R5aY80xaDqAw7C+2b5p9L11RqYTI4Fuhi15n4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 15:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jA5KI9R5aY80xaDqAw7C+2b5p9L11RqYTI4Fuhi15n4="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.kug9hcv4gp.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41006"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jA5KI9R5aY80xaDqAw7C+2b5p9L11RqYTI4Fuhi15n4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 15:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kug9hcv4gp"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/1ca1be75-4830-44c2-baa1-ce2ac1107e8c_paslanmaz_masa_ayagi.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jA5KI9R5aY80xaDqAw7C+2b5p9L11RqYTI4Fuhi15n4="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.cenkvq9dff.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:54:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cenkvq9dff"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/1d6bc9ca-587f-4a4b-9690-5cbcc6b8bee9_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:54:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
     {
       "Route": "images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.hzsuxnwf2s.jpeg",
       "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/693faff2-b13d-4cf0-8031-e4244ee0f46c_hero_bg.jpeg",
@@ -118,6 +574,580 @@
         {
           "Name": "integrity",
           "Value": "sha256-w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "95063"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w5l5Q/HU+9GXdZCqDG0Y0h6LZoewrDGk1FAuyhM7cI8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 15:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-w5l5Q/HU+9GXdZCqDG0Y0h6LZoewrDGk1FAuyhM7cI8="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.x7qe6hc2wf.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "95063"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w5l5Q/HU+9GXdZCqDG0Y0h6LZoewrDGk1FAuyhM7cI8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 15:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x7qe6hc2wf"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/9510ef34-2260-43eb-9d3d-7a4b1cb728cf_paslanmaz _tente.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-w5l5Q/HU+9GXdZCqDG0Y0h6LZoewrDGk1FAuyhM7cI8="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.cenkvq9dff.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 13:02:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cenkvq9dff"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a2574792-4ba2-4f00-b758-b2adf9c9e8d3_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 13:02:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.cenkvq9dff.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 13:29:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cenkvq9dff"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a3f95b83-91a2-4407-ad7f-00e47e13609f_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 13:29:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.hzsuxnwf2s.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "156751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 08:25:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hzsuxnwf2s"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/a997715d-355d-4e82-84f4-0b4a2af33eb6_hero_bg.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "156751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 08:25:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-w9RdO4zoX1SnAQIsF6nkqrYJN8WwtYMPZvYIl7T3lW4="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.cenkvq9dff.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:35:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cenkvq9dff"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/f1f89647-fa18-4171-82f7-4cba3fa83631_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:35:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "127326"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ASnBh+vkn691UdiK/aDvhowjRCPvGc0Ia1y+Ur8n82U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 15:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ASnBh+vkn691UdiK/aDvhowjRCPvGc0Ia1y+Ur8n82U="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.x41lk7qqdw.jpeg",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "127326"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ASnBh+vkn691UdiK/aDvhowjRCPvGc0Ia1y+Ur8n82U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Feb 2026 15:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x41lk7qqdw"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/f620957e-dd66-4563-93f2-4edbb2828add_Paslanmaz_Baba.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ASnBh+vkn691UdiK/aDvhowjRCPvGc0Ia1y+Ur8n82U="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.cenkvq9dff.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:15:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cenkvq9dff"
+        },
+        {
+          "Name": "label",
+          "Value": "images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
+        }
+      ]
+    },
+    {
+      "Route": "images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.webp",
+      "AssetFile": "/Users/muminemuroglu/Documents/E_Commerce/ECommerce/src/Presentation/ECommerce.RestApi/wwwroot/images/products/fdf8cae1-3a38-4dcd-affc-3c5577299ca5_airtag-nedir-2.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13638"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Feb 2026 12:15:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dKppIimnYiNx8pyjMdD9Mdh1u7KjdcMsUakSv5vSDTs="
         }
       ]
     }

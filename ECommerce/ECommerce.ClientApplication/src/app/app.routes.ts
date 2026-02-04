@@ -28,7 +28,7 @@ export const routes: Routes = [
     { path: 'profile', component: ProfileComponent ,canActivate: [authGuard]},
     { path: 'checkout', component: CheckoutComponent },
     { path: 'orders', component: OrdersComponent },
-    { path: 'order-detail/:id', component: OrderDetailComponent },
+    { path: 'orders/:id', component: OrderDetailComponent },
     {path:'products', component: ProductListComponent}, // Ürünler sayfası için rota
    { path: 'categories', component: CategoryListComponent }, // Kategoriler sayfası için rota
    { path: 'change-password', component: ChangePasswordComponent,canActivate: [authGuard] },

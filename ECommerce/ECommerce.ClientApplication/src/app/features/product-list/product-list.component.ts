@@ -2,21 +2,18 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Product} from '../../core/models/product';
- // Kategorileri çekmek için
+import { Product, BrandFilter, ProductFilterParams } from '../../core/models/product';
 import { Category } from '../../core/models/category';
-import { CategoryService } from '../../core/services/category-service.service';
-import { ProductService } from '../../core/services/productService.service';
-import { CartService } from '../../core/services/cart-service.service';
-import { ProductFilterParams } from '../../core/models/productFilterParams';
-import { BrandFilter } from '../../core/models/brandFilter';
 import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
+import { ProductService } from '../../core/services/productService.service';
+import { CategoryService } from '../../core/services/category-service.service';
+import { CartService } from '../../core/services/cart-service.service';
 
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule,ImageUrlPipe],
+  imports: [CommonModule, FormsModule, RouterModule, ImageUrlPipe],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
@@ -67,7 +64,7 @@ export class ProductListComponent implements OnInit {
   loadCategories() {
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res.data || [];
-        this.cdr.detectChanges();
+      this.cdr.detectChanges();
     });
   }
 
@@ -89,9 +86,10 @@ export class ProductListComponent implements OnInit {
         this.loading = false;
       }
     });
-      this.cdr.detectChanges();
+    this.cdr.detectChanges();
   }
-    // --- FİLTRE OLAYLARI ---
+
+  // --- FİLTRE OLAYLARI ---
 
   // Kategori Değişimi
   onCategoryChange(categoryId: string | null) {

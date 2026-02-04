@@ -2,14 +2,15 @@ import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetect
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 import { OrderService } from '../../core/services/order-service.service';
 import { CustomerService } from '../../core/services/customer-service.service';
-import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
+
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, RouterModule,ImageUrlPipe],
+  imports: [CommonModule, RouterModule, ImageUrlPipe],
   templateUrl: './orders.component.html',
   changeDetection: ChangeDetectionStrategy.Default
 

@@ -80,23 +80,22 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost("Create")]
-    [Authorize(Roles = "Admin,CompanyManager")] // Sadece Admin ürün ekleyebilir
-    //[ApiKey] // X-Api-Key Header kontrolü
-    public async Task<IActionResult> Create(ProductCreateDto dto)
-    {
-        var result = await _productService.CreateAsync(dto);
-        return Ok(result);
-    }
+[Authorize(Roles = "Admin,CompanyManager")]
+// [FromBody] YERİNE [FromForm] KULLANIYORUZ
+public async Task<IActionResult> Create([FromForm] ProductCreateDto dto) 
+{
+    var result = await _productService.CreateAsync(dto);
+    return Ok(result);
+}
 
-    [HttpPut("Update/{id}")]  // PUT da olabilir hata alırsan put ile dene
-    [Authorize(Roles = "Admin,CompanyManager")]
-    [Authorize(Policy = "CompanyIsolation")] // Başkasının ürününü güncellemeyi engeller
-    //[ApiKey] // X-Api-Key Header kontrolü
-    public async Task<IActionResult> Update(Guid id, ProductUpdateDto dto)
-    {
-        var result = await _productService.UpdateAsync(id, dto);
-        return result.Success ? Ok(result) : BadRequest(result);
-    }
+    [HttpPut("Update/{id}")]
+[Authorize(Roles = "Admin,CompanyManager")]
+[Authorize(Policy = "CompanyIsolation")]
+public async Task<IActionResult> Update(Guid id, [FromForm] ProductUpdateDto dto)
+{
+    var result = await _productService.UpdateAsync(id, dto);
+    return result.Success ? Ok(result) : BadRequest(result);
+}
 
     [HttpDelete("Delete/{id}")]
     [Authorize(Roles = "Admin,CompanyManager")]

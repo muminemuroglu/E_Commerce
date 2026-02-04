@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-import { Product } from '../../core/models/product';
+import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 import { FavoriteService } from '../../core/services/favorite-service.service';
 import { CartService } from '../../core/services/cart-service.service';
-import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
+import { Product } from '../../core/models/product';
+
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, RouterModule,ImageUrlPipe],
-  templateUrl: './favorites.component.html'
+  imports: [CommonModule, RouterModule, ImageUrlPipe],
+  templateUrl: './favorites.component.html',
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class FavoritesComponent {
   constructor(
-    public favService: FavoriteService,
-    private cartService: CartService
+    public favoriteService: FavoriteService,
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   moveToCart(product: Product) {
@@ -24,5 +26,6 @@ export class FavoritesComponent {
     // İsteğe bağlı: Sepete ekleyince favorilerden silsin mi? 
     // this.favService.toggleFavorite(product); 
     alert("Ürün sepete eklendi!");
+    this.cdr.markForCheck();
   }
 }
