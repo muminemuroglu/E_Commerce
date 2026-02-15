@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Application.DTOs.Auth;
-//MAğaza tarafında kullanıcı kaydı ve giriş işlemleri için gerekli
+//Mağaza tarafında kullanıcı kaydı ve giriş işlemleri için gerekli
 public class RegisterDto
 {
     [Required(ErrorMessage = "Ad alanı zorunludur.")]

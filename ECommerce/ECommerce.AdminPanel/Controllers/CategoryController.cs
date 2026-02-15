@@ -22,35 +22,40 @@ public class CategoryController : Controller
         _apiService = apiService;
     }
 
+
+    // KATEGORİ LİSTESİ
     public async Task<IActionResult> Index()
     {
-        // Manager ise sadece kendi şirketinin kategorileri gelir (API'de filtrelediysen)
+
         var response = await _apiService.GetAsync<IEnumerable<CategoryDto>>("Category/List");
         var model = new CategoryListViewModel { Categories = response?.Data ?? new List<CategoryDto>() };
         return View(model);
     }
 
+    // KATEGORİ EKLEME
     [HttpGet]
     public async Task<IActionResult> Create()
     {
-        // Üst kategori seçebilmesi için mevcut kategorileri çekiyoruz
+
         var response = await _apiService.GetAsync<IEnumerable<CategoryDto>>("Category/List");
         ViewBag.ParentCategories = response?.Data?.ToList() ?? new List<CategoryDto>();
 
         return View(new CategoryViewModel());
     }
 
+
+    // KATEGORİ EKLEME (POST)
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CategoryViewModel model)
     {
         if (!ModelState.IsValid) return View(model);
 
-        // Oturumdaki CompanyId'yi alıyoruz
+
         var companyIdStr = User.FindFirstValue("companyId") ?? HttpContext.Session.GetString("companyId");
         model.CompanyId = Guid.Parse(companyIdStr ?? Guid.Empty.ToString());
 
-        // API'ye gönderiyoruz
+
         var response = await _apiService.PostAsync<CategoryViewModel, Guid>("Category/Create", model);
 
         if (response != null && response.Success)
@@ -67,7 +72,7 @@ public class CategoryController : Controller
     [HttpGet]
     public async Task<IActionResult> Update(Guid id)
     {
-        // API'den mevcut kategoriyi getir
+
         var response = await _apiService.GetAsync<CategoryDto>($"Category/GetById/{id}");
 
         if (response == null || !response.Success)
@@ -88,62 +93,63 @@ public class CategoryController : Controller
         return View(model);
     }
 
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Update(UpdateCategoryViewModel model)
-{
-    // CompanyId'yi sadece Session'dan al
-    var companyIdStr = HttpContext.Session.GetString("companyId");
 
-    if (string.IsNullOrWhiteSpace(companyIdStr) || !Guid.TryParse(companyIdStr, out Guid companyId))
+    // KATEGORİ DÜZENLEME (POST)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(UpdateCategoryViewModel model)
     {
-        TempData["ErrorMessage"] = "Firma bilgisi bulunamadı. Lütfen tekrar giriş yapın.";
-        return RedirectToAction("Login", "Auth");
+
+        var companyIdStr = HttpContext.Session.GetString("companyId");
+
+        if (string.IsNullOrWhiteSpace(companyIdStr) || !Guid.TryParse(companyIdStr, out Guid companyId))
+        {
+            TempData["ErrorMessage"] = "Firma bilgisi bulunamadı. Lütfen tekrar giriş yapın.";
+            return RedirectToAction("Login", "Auth");
+        }
+
+        model.CompanyId = companyId;
+
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var updateDto = new CategoryUpdateDto
+        {
+
+            Name = model.Name,
+            Description = model.Description,
+            CompanyId = model.CompanyId
+        };
+
+        var response = await _apiService.PostAsync<CategoryUpdateDto, bool>($"Category/Update/{model.Id}", updateDto);
+
+        if (response is { Success: true })
+        {
+            TempData["SuccessMessage"] = "Kategori başarıyla güncellendi.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        ViewBag.Error = response?.Message ?? "Güncelleme sırasında hata oluştu.";
+        return View(model);
     }
 
-    model.CompanyId = companyId;
-
-    if (!ModelState.IsValid)
-        return View(model);
-
-    var updateDto = new CategoryUpdateDto
+    // KATEGORİ SİLME
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(Guid id)
     {
-        
-        Name = model.Name,
-        Description = model.Description,
-        CompanyId = model.CompanyId
-    };
 
-    var response = await _apiService.PostAsync<CategoryUpdateDto, bool>($"Category/Update/{model.Id}", updateDto);
+        var response = await _apiService.DeleteAsync($"Category/Delete/{id}");
 
-    if (response is { Success: true })
-    {
-        TempData["SuccessMessage"] = "Kategori başarıyla güncellendi.";
+        if (response != null && response.Success)
+        {
+            TempData["SuccessMessage"] = "Kategori başarıyla silindi.";
+        }
+        else
+        {
+            TempData["ErrorMessage"] = response?.Message ?? "Kategori silinemedi.";
+        }
+
         return RedirectToAction(nameof(Index));
     }
-
-    ViewBag.Error = response?.Message ?? "Güncelleme sırasında hata oluştu.";
-    return View(model);
-}
-
-// MARKA SİLME
-[HttpPost] // View'dan gelen form isteği POST'tur
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Delete(Guid id)
-{
-    // API'ye DELETE isteği gönderiyoruz
-    // BaseApiService içindeki DeleteAsync metodunu çağırmalıyız
-    var response = await _apiService.DeleteAsync($"Category/Delete/{id}");
-
-    if (response != null && response.Success)
-    {
-        TempData["SuccessMessage"] = "Kategori başarıyla silindi.";
-    }
-    else
-    {
-        TempData["ErrorMessage"] = response?.Message ?? "Kategori silinemedi.";
-    }
-
-    return RedirectToAction(nameof(Index));
-}
 }

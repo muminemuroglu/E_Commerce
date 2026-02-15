@@ -18,8 +18,7 @@ export class LoginComponent {
 
  onLogin() {
   if (this.email && this.password) {
-    // isLoading = true; // İstersen loading ekleyebilirsin
-    
+   
     this.authService.login({ email: this.email, password: this.password })
       .subscribe({
         next: (res) => {

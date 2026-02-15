@@ -49,19 +49,19 @@ public class CustomerController : ControllerBase
 
 
     [HttpGet("GetProfile")]
-public async Task<IActionResult> GetProfile()
-{
-    var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-    return Ok(await _customerService.GetProfileByUserIdAsync(userId));
-}
+    public async Task<IActionResult> GetProfile()
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        return Ok(await _customerService.GetProfileByUserIdAsync(userId));
+    }
 
-[HttpPut("UpdateProfile")]
-public async Task<IActionResult> UpdateProfile([FromBody] CustomerUpdateDto dto)
-{
-    // Güvenlik: Token'daki ID'yi kullan, DTO'dan geleni ez.
-    var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-    dto.UserId = userId;
+    [HttpPut("UpdateProfile")]
+    public async Task<IActionResult> UpdateProfile([FromBody] CustomerUpdateDto dto)
+    {
+        // Güvenlik: Token'daki ID'yi kullan, DTO'dan geleni ez.
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        dto.UserId = userId;
 
-    return Ok(await _customerService.UpdateProfileAsync(dto));
-}
+        return Ok(await _customerService.UpdateProfileAsync(dto));
+    }
 }

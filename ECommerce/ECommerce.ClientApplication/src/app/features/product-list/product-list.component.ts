@@ -1,14 +1,22 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Product, BrandFilter, ProductFilterParams } from '../../core/models/product';
+import {
+  Product,
+  BrandFilter,
+  ProductFilterParams,
+} from '../../core/models/product';
 import { Category } from '../../core/models/category';
 import { ImageUrlPipe } from '../../core/pipes/image-url.pipe';
 import { ProductService } from '../../core/services/productService.service';
 import { CategoryService } from '../../core/services/category-service.service';
 import { CartService } from '../../core/services/cart-service.service';
-
 
 @Component({
   selector: 'app-product-list',
@@ -16,10 +24,9 @@ import { CartService } from '../../core/services/cart-service.service';
   imports: [CommonModule, FormsModule, RouterModule, ImageUrlPipe],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ProductListComponent implements OnInit {
-
   // Veriler
   products: Product[] = [];
   categories: Category[] = [];
@@ -33,8 +40,8 @@ export class ProductListComponent implements OnInit {
     pageSize: 12,
     sortBy: 'newest',
     brandIds: [],
-    minPrice: undefined, // null -> undefined
-    maxPrice: undefined  // null -> undefined
+    minPrice: undefined,
+    maxPrice: undefined,
   };
 
   constructor(
@@ -43,26 +50,26 @@ export class ProductListComponent implements OnInit {
     private categoryService: CategoryService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-    // 1. Kategorileri Çek (Sol Menü İçin)
+    // 1. Kategorileri Çekiyoruz (Sol Menü İçin)
     this.loadCategories();
 
-    // 2. URL'deki parametreleri dinle (Linkten gelirse filtreyi uygula)
-    this.route.queryParams.subscribe(params => {
+    // 2. URL'deki parametreleri dinliyoruz (Linkten gelirse filtreyi uyguluyoruz)
+    this.route.queryParams.subscribe((params) => {
       this.filter.categoryId = params['categoryId'] || null;
       this.filter.keyword = params['keyword'] || null;
 
-      // Filtreleri uygula ve ürünleri çek
+      // Filtreleri uyguluyoruz ve ürünleri çekiyoruz
       this.loadProducts();
       this.cdr.detectChanges();
     });
   }
 
   loadCategories() {
-    this.categoryService.getCategories().subscribe(res => {
+    this.categoryService.getCategories().subscribe((res) => {
       this.categories = res.data || [];
       this.cdr.detectChanges();
     });
@@ -84,7 +91,7 @@ export class ProductListComponent implements OnInit {
       error: (err) => {
         console.error(err);
         this.loading = false;
-      }
+      },
     });
     this.cdr.detectChanges();
   }
@@ -94,7 +101,7 @@ export class ProductListComponent implements OnInit {
   // Kategori Değişimi
   onCategoryChange(categoryId: string | null) {
     this.filter.categoryId = categoryId ? categoryId : undefined;
-    this.filter.pageNumber = 1; // Filtre değişince ilk sayfaya dön
+    this.filter.pageNumber = 1; // Filtre değişince ilk sayfaya dönüyoruz
     this.loadProducts();
     this.cdr.detectChanges();
   }
@@ -108,7 +115,9 @@ export class ProductListComponent implements OnInit {
     if (checked) {
       this.filter.brandIds.push(brandId);
     } else {
-      this.filter.brandIds = this.filter.brandIds.filter(id => id !== brandId);
+      this.filter.brandIds = this.filter.brandIds.filter(
+        (id) => id !== brandId,
+      );
     }
 
     this.filter.pageNumber = 1;
@@ -144,15 +153,15 @@ export class ProductListComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  // Filtreleri Temizle
+  // Filtreleri Temizliyoruz
   clearFilters() {
     this.filter = {
       pageNumber: 1,
       pageSize: 12,
       sortBy: 'newest',
-      brandIds: []
+      brandIds: [],
     };
-    // URL'i de temizle
+    // URL'i de temizliyrouz
     this.router.navigate(['/products']);
     this.loadProducts();
     this.cdr.detectChanges();

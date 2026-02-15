@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ECommerce.Infrastructure;
 
-public static class DependencyInjection //servis kayıtlarını DependencyInjection.cs extension dosyasında tutuyorum
+public static class DependencyInjection //servis kayıtlarını DependencyInjection.cs extension dosyasında tutuyoruz, böylece program.cs daha temiz ve düzenli olur
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {

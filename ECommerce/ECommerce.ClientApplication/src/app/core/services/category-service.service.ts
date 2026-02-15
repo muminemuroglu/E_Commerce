@@ -12,12 +12,12 @@ export class CategoryService {
   constructor(private baseService: BaseService) { }
 
   // Tüm kategorileri getir
-  // Backend'deki endpoint muhtemelen: api/Category/List
+  
   getCategories(): Observable<ApiResponse<Category[]>> {
     return this.baseService.get<ApiResponse<Category[]>>('Category/AllList');
   }
 
-  // Tek bir kategori getir (İleride lazım olabilir)
+  // Tek bir kategori getir 
   getCategoryById(id: string): Observable<ApiResponse<Category>> {
     return this.baseService.get<ApiResponse<Category>>(`Category/GetById/${id}`);
   }

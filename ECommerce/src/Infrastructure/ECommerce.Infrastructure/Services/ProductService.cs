@@ -30,14 +30,7 @@ public class ProductService : IProductService
         return ApiResponse<IEnumerable<ProductDto>>.SuccessResult(dtos);
     }
 
-    /*public async Task<ApiResponse<ProductDto>> GetByIdAsync(Guid id)
-    {
-        var product = await _unitOfWork.Products.GetByIdAsync(id);
-        if (product == null) return ApiResponse<ProductDto>.ErrorResult("Ürün bulunamadı.");
-
-        var dto = _mapper.Map<ProductDto>(product);
-        return ApiResponse<ProductDto>.SuccessResult(dto);
-    }*/
+   
 
     public async Task<ApiResponse<ProductDto>> GetByIdAsync(Guid id)
     {

@@ -46,13 +46,13 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 1. Sepet boşsa ana sayfaya at
+    // 1. Sepet boşsa ana sayfaya atıyoruz (checkout sayfasına direkt erişimi engellemek için)
     if (this.cartService.totalItems() === 0) {
       this.router.navigate(['/']);
       return;
     }
 
-    // 2. Müşteri bilgilerini çek (Adres ve ID için)
+    // 2. Müşteri bilgilerini çekiyoruz (Adres ve ID için)
     if (this.authService.isLoggedIn()) {
       this.customerService.getProfile().subscribe(profile => {
         if (profile) {

@@ -18,8 +18,8 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
     var query = _context.Orders
         .Include(o => o.Customer)
             .ThenInclude(c => c.User)
-        .Include(o => o.OrderItems)          // <--- EKLE: Sipariş kalemlerini bağla
-            .ThenInclude(oi => oi.Product)   // <--- EKLE: Kalemlerin içindeki ürünleri bağla
+        .Include(o => o.OrderItems)          // Sipariş kalemlerini bağlıyrouz
+            .ThenInclude(oi => oi.Product)   // Kalemlerin içindeki ürünleri bağlıyoruz
         .Where(o => o.CustomerId == customerId && !o.IsDeleted);
 
     if (companyId.HasValue)
@@ -33,8 +33,8 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
     public async Task<IEnumerable<Order>> GetAllWithDetailsAsync(Guid? companyId)
     {
         return await _context.Orders
-            .Include(o => o.Customer)           // Önce Müşteri tablosunu bağla
-                .ThenInclude(c => c.User)       // Müşterinin içindeki User tablosunu bağla (İsim burada)
+            .Include(o => o.Customer)           // Önce Müşteri tablosunu bağlıyoruz
+                .ThenInclude(c => c.User)       // Müşterinin içindeki User tablosunu bağlıyrouz (İsim burada)
             .Where(o => !o.IsDeleted && (!companyId.HasValue || o.CompanyId == companyId.Value))
             .AsNoTracking()
             .ToListAsync();
@@ -44,8 +44,8 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
 public async Task<Order?> GetByIdWithDetailsAsync(Guid id)
 {
     return await _context.Orders
-        .Include(o => o.OrderItems)           // Sipariş kalemlerini getir
-            .ThenInclude(oi => oi.Product)    // <--- BU SATIRI EKLEYİN: Ürün resmine erişmek için şart
+        .Include(o => o.OrderItems)           // Sipariş kalemlerini getiriyrouz
+            .ThenInclude(oi => oi.Product)    // Ürün resmine erişmek için şart
         .Include(o => o.Customer)             
             .ThenInclude(c => c.User)         
         .FirstOrDefaultAsync(o => o.Id == id);

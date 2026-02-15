@@ -11,21 +11,21 @@ import { CategoryService } from '../../core/services/category-service.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule], // FormsModule'u eklemeyi unutma!
+  imports: [CommonModule, RouterModule, FormsModule], 
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class Navbar implements OnInit {
   
-  searchKeyword: string = ''; // Arama metnini tutacak değişken
-  categories: Category[] = []; // Kategorileri tutacak dizi
+  searchKeyword: string = ''; 
+  categories: Category[] = []; 
 
   constructor(
     public authService: AuthService, 
     public cartService: CartService,
     private categoryService: CategoryService,
-    private router: Router, // Router inject edildi
+    private router: Router, 
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -44,16 +44,16 @@ export class Navbar implements OnInit {
 
   onSearch() {
     if (this.searchKeyword && this.searchKeyword.trim().length > 0) {
-      // Ürünler sayfasına 'keyword' parametresiyle git
+      // Ürünler sayfasına 'keyword' parametresiyle gidiyrouz
       this.router.navigate(['/products'], { 
         queryParams: { keyword: this.searchKeyword } 
       });
-      // Arama sonrası kutuyu temizlemek istersen:
+      // Arama sonrası kutuyu temizliyoruz:
        this.searchKeyword = '';
       this.cdr.detectChanges();
     }
   }
-  // navbar.component.ts içine ekleyin
+ 
 getCategoryIcon(name: string): string {
   const lowerName = name.toLowerCase();
   if (lowerName.includes('telefon')) return 'bi-phone';

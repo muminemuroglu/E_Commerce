@@ -19,7 +19,6 @@ public class BannerController : Controller
     // BANNER LİSTESİ
     public async Task<IActionResult> Index()
     {
-        // API tarafında güncellediğimiz "Banner/List" endpoint'ini çağırıyoruz
         var response = await _apiService.GetAsync<IEnumerable<BannerDto>>("Banner/List");
         return View(response?.Data ?? new List<BannerDto>());
     }
@@ -61,7 +60,7 @@ public class BannerController : Controller
         return View(model);
     }
 
-    // BannerController.cs (MVC)
+    
 
 [HttpGet]
 public async Task<IActionResult> Update(Guid id)
@@ -81,7 +80,7 @@ public async Task<IActionResult> Update(Guid id)
         TargetUrl = response.Data.TargetUrl,
         Order = response.Data.Order,
         Status = response.Data.Status,
-        CompanyId = response.Data.CompanyId // Şirket ID'sini korumak kritik
+        CompanyId = response.Data.CompanyId 
     };
 
     return View(model);

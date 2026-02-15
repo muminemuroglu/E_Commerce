@@ -80,17 +80,17 @@ public class CustomerService : ICustomerService
 
     public async Task<ApiResponse<bool>> UpdateProfileAsync(CustomerUpdateDto dto)
 {
-    // 1. Önce User tablosundaki Ad, Soyad ve Email'i güncelle
+    // 1. Önce User tablosundaki Ad, Soyad ve Email'i güncelliyoruz
     var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
     if (user == null) return ApiResponse<bool>.ErrorResult("Kullanıcı bulunamadı.");
 
     user.FirstName = dto.FirstName;
     user.LastName = dto.LastName;
-    user.Email = dto.Email; // Email değiştirmek genelde ekstra doğrulama ister, şimdilik kapalı tutabiliriz veya açabiliriz.
+    user.Email = dto.Email;
     
     _unitOfWork.Users.Update(user);
 
-    // 2. Şimdi Customer tablosundaki Telefon, Adres, Şehir bilgilerini güncelle
+    // 2. Customer tablosundaki Telefon, Adres, Şehir bilgilerini güncelliyoruz
     // Kullanıcının ID'sine bağlı bir Müşteri kaydı var mı diye bakıyoruz
     var customer = (await _unitOfWork.Customers.FindAsync(c => c.UserId == dto.UserId)).FirstOrDefault();
 
@@ -124,9 +124,9 @@ public class CustomerService : ICustomerService
 }
 public async Task<ApiResponse<CustomerDto>> GetProfileByUserIdAsync(Guid userId)
 {
-    // ESKİ HATALI KOD: GetByIdWithUserAsync(userId) -> Yanlış! Bu CustomerId bekler.
     
-    // YENİ DOĞRU KOD: FindWithUserAsync ile UserId'ye göre arıyoruz.
+    
+    // FindWithUserAsync ile UserId'ye göre arıyoruz.
     var customers = await _unitOfWork.Customers.FindWithUserAsync(c => c.UserId == userId);
     var customer = customers.FirstOrDefault();
 

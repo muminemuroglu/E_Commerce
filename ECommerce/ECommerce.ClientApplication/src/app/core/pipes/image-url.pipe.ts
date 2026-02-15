@@ -6,21 +6,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ImageUrlPipe implements PipeTransform {
 
-  // Backend adresin (RestApi launchSettings.json'daki https portu)
+  // Backend adresi (RestApi launchSettings.json'daki https portu)
   private apiUrl = 'http://localhost:5203'; 
 
   transform(value: string | undefined | null): string {
-    // 1. Resim yoksa placeholder göster
+    // 1. Resim yoksa placeholder gösteriyoruz
     if (!value) {
-      return 'assets/placeholder.png'; // assets klasörüne bir tane placeholder.png atabilirsin
+      return 'assets/placeholder.png'; // assets klasörüne bir tane placeholder.png atıyoruz
     }
 
-    // 2. Eğer resim zaten tam bir URL ise (Amazon, Vatan linkleri gibi) olduğu gibi döndür
+    // 2. Eğer resim zaten tam bir URL ise (Amazon, Vatan linkleri gibi) olduğu gibi döndürüyoruz
     if (value.startsWith('http') || value.startsWith('https')) {
       return value;
     }
 
-    // 3. Eğer resim relative path ise (/images/...) başına API adresini ekle
+    // 3. Eğer resim relative path ise (/images/...) başına API adresini ekliyoruz
     return `${this.apiUrl}${value}`;
   }
 

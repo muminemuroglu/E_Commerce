@@ -37,14 +37,7 @@ public class BaseApiService
     }
 
     // CS8603 Çözümü: Geri dönüş tipini '?' ile nullable yaparak veya null gelirse yeni nesne dönerek çözüyoruz
-    /*public async Task<ApiResponse<T>?> GetAsync<T>(string endpoint)
-    {
-        AddTokenToHeader();
-        var response = await _httpClient.GetAsync(endpoint);
-        var content = await response.Content.ReadAsStringAsync();
-        
-        return JsonSerializer.Deserialize<ApiResponse<T>>(content, _jsonOptions);
-    }*/
+    
 
 
 
@@ -151,7 +144,7 @@ public class BaseApiService
 
 /*
 
-notlar: 
+NOTLAR: 
 1. HttpClient Nedir?
    - HttpClient, başka bir sunucuya HTTP isteği atmanı sağlar. MVC → API çağrısı gibi.
 

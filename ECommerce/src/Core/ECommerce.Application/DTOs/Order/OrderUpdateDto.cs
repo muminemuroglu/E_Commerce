@@ -8,7 +8,6 @@ public class OrderUpdateDto
     [Required]
     public Guid Id { get; set; }
 
-    // Genelde siparişte update işlemi olarak status update kullanılır
     [Required]
     public OrderStatus Status { get; set; }
 }

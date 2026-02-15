@@ -13,7 +13,7 @@ export class AuthService {
   currentUser = signal<{ name: string, email: string, role: string } | null>(null);
 
   constructor(private baseService: BaseService, private router: Router, private cartService: CartService) {
-    // Sayfa yenilendiğinde Token varsa kullanıcıyı geri yükle
+    // Sayfa yenilendiğinde Token varsa kullanıcıyı geri yüklüyor
     const token = localStorage.getItem('token');
     if (token) {
       this.setUserFromToken(token);
@@ -60,13 +60,10 @@ export class AuthService {
       const payloadJson = atob(payloadBase64);
       const payload = JSON.parse(payloadJson);
 
-      // Backend'de claim isimleri: 
-      // "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" -> Email
-      // "fullName" -> Ad Soyad (Bizim eklediğimiz)
-      // "http://schemas.microsoft.com/ws/2008/06/identity/claims/role" -> Role
+      
 
       const user = {
-        name: payload['fullName'] || 'Kullanıcı', // fullName claim'ini oku
+        name: payload['fullName'] || 'Kullanıcı', // Backend'de claim olarak "fullName" ekledik, yoksa "Kullanıcı" yazsın
         email: payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
         role: payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
       };

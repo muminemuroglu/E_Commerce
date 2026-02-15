@@ -18,11 +18,7 @@ public class OrderController : Controller
 
     public async Task<IActionResult> Index()
     {
-        // Not: API'deki "Order/List" endpoint'i tüm siparişleri dönüyor olabilir. 
-        // Ancak senin kurguna göre şirket bazlı filtreleme yapmak için 
-        // API tarafındaki "ByCustomer" mantığına benzer bir "GetAllByRole" endpoint'ine ihtiyacın var.
-        
-        // Mevcut API yapına göre en uygun endpoint'i çağırıyoruz:
+       
         var response = await _apiService.GetAsync<IEnumerable<OrderDto>>("Order/List");
 
         if (response != null && response.Success)

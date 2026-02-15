@@ -15,6 +15,8 @@ public class UserController : Controller
     private readonly BaseApiService _apiService;
     public UserController(BaseApiService apiService) => _apiService = apiService;
 
+
+
     public async Task<IActionResult> Index()
     {
         var role = User.FindFirstValue(ClaimTypes.Role);
@@ -112,7 +114,7 @@ public class UserController : Controller
 
         if (response != null && response.Success)
         {
-            // Session güncellenerek Layout'taki ismin hemen değişmesi sağlanır.
+            // Session güncellenerek Layout'taki ismin hemen değişmesini sağlıyoruz.
             HttpContext.Session.SetString("UserName", $"{model.FirstName} {model.LastName}");
             TempData["SuccessMessage"] = "Profil bilgileriniz başarıyla güncellendi.";
             return RedirectToAction(nameof(Profile));

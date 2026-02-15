@@ -13,7 +13,7 @@ public class ProductFilterDto
     // Sıralama: "price_asc", "price_desc", "newest", "name_asc"
     public string? SortBy { get; set; } 
     
-    // Sayfalama (Pagination) - İleride lazım olur, şimdiden ekleyelim
+    // Sayfalama (Pagination) 
     public int PageNumber { get; set; } = 1;
     public int PageSize { get; set; } = 12;
 }

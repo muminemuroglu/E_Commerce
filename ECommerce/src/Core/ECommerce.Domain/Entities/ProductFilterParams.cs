@@ -4,7 +4,7 @@ public class ProductFilterParams
 {
     public Guid? CategoryId { get; set; }
     public List<Guid>? BrandIds { get; set; } // Çoklu marka seçimi için
-    public decimal? MinPrice { get; set; } // Product.Price > Filter.MinPrice mantığınıkurgulamak için 
+    public decimal? MinPrice { get; set; } // Product.Price > Filter.MinPrice mantığını kurgulamak için 
     public decimal? MaxPrice { get; set; }
     public string? Keyword { get; set; }
     public bool? IsFreeShipping { get; set; }

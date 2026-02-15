@@ -25,7 +25,7 @@ public class CustomerCreateDto
     [Required(ErrorMessage = "Şehir zorunludur.")]
     public string City { get; set; } = string.Empty;
 
-    // İş kuralına göre değişebilir: müşteri başka user'a bağlanacak mı?
+   
     [Required]
     public Guid UserId { get; set; }
 

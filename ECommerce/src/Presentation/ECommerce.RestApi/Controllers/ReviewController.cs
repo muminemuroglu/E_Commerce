@@ -25,7 +25,7 @@ public class ReviewController : ControllerBase
         var companyIdStr = User.FindFirstValue("companyId");
         Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
 
-        // Yeni yazdığımız repository metodunu çağıran servis metodunu kullanacağız
+       
         var result = await _reviewService.GetAllWithDetailsAsync(companyId, role);
         return Ok(result);
     }

@@ -40,8 +40,8 @@ public class UserController : ControllerBase
     [HttpPut("UpdateProfile/{userId}")]
     public async Task<IActionResult> UpdateProfile([FromRoute] Guid userId, [FromBody] UserUpdateDto dto)
     {
-        // userId parametresi ile dto.Id uyuşmazlığı validation hatasına sebep olduğu iiçin burada eşitleme yaptım
-        // DTO içindeki ID'yi URL'den gelen ile eşitlendi
+
+        // DTO içindeki ID'yi URL'den gelen ile eşitleiyoruz, böylece kullanıcı sadece kendi profilini güncelleyebilir
         dto.Id = userId;
 
         var result = await _userService.UpdateProfileAsync(userId, dto);

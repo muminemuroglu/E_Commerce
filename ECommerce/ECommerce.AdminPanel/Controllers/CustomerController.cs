@@ -44,25 +44,9 @@ public class CustomerController : Controller
     }
 
 
-/*
-    public async Task<IActionResult> Details(Guid id)
-{
-    // 1. Müşteri bilgilerini çek (CustomerController üzerinden GetById endpoint'in olduğunu varsayıyoruz)
-    var customerResponse = await _apiService.GetAsync<CustomerDto>($"Customer/{id}");
-    
-    // 2. Müşterinin bu şirketteki siparişlerini çek
-    var ordersResponse = await _apiService.GetAsync<IEnumerable<OrderDto>>($"Order/ByCustomer/{id}");
-
-    if (customerResponse == null || !customerResponse.Success) return NotFound();
-
-    ViewBag.Orders = ordersResponse?.Data ?? new List<OrderDto>();
-    return View(customerResponse.Data);
-}
-*/
-
 public async Task<IActionResult> Details(Guid id)
 {
-    // 1. Müşteri bilgilerini çek
+    
     var customerResponse = await _apiService.GetAsync<CustomerDto>($"Customer/{id}");
     
     // API'den müşteri gelmediyse veya hata oluştuysa
@@ -72,7 +56,7 @@ public async Task<IActionResult> Details(Guid id)
         return RedirectToAction(nameof(Index));
     }
 
-    // 2. Müşterinin siparişlerini çek
+    // Müşterinin siparişlerini çek
     var ordersResponse = await _apiService.GetAsync<IEnumerable<OrderDto>>($"Order/ByCustomer/{id}");
 
     // View'a null gitmemesi için garantiye alıyoruz

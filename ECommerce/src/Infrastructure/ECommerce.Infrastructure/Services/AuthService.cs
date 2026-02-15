@@ -33,13 +33,13 @@ public class AuthService : IAuthService
             return ApiResponse<string>.ErrorResult("E-posta veya şifre hatalı.");
 
         // 3. Token Üret
-        // YENİ: Ad ve Soyadı birleştiriyoruz
+        //  Ad ve Soyadı birleştiriyoruz
         string fullName = $"{user.FirstName} {user.LastName}";
 
         var token = JwtTokenHelper.GenerateToken(
             user.Id,
             user.Email,
-            fullName, // YENİ: Parametre olarak gönderiyoruz
+            fullName, //Parametre olarak gönderiyoruz
             user.CompanyId ?? Guid.Empty,
             new List<string> { user.Role }
         );
@@ -53,7 +53,7 @@ public class AuthService : IAuthService
         var existingUser = await _unitOfWork.Users.FindAsync(u => u.Email == dto.Email);
         if (existingUser.Any()) return ApiResponse<Guid>.ErrorResult("Email zaten kayıtlı.");
 
-        // 2. ÖNCE ŞİRKETİ OLUŞTUR
+        // 2. Önce şirketi oluşturuyoruz, çünkü kullanıcı kaydında CompanyId'ye ihtiyacımız var
         var newCompany = new Company
         {
             Id = Guid.NewGuid(),
@@ -67,7 +67,7 @@ public class AuthService : IAuthService
         };
         await _unitOfWork.Companies.AddAsync(newCompany);
 
-        // 3. KULLANICIYI OLUŞTUR VE ŞİRKETİ BAĞLA
+        // 3. Sonra kullanıcıyı oluşturuyoruz ve yeni şirketin Id'sini atıyoruz
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -75,8 +75,8 @@ public class AuthService : IAuthService
             LastName = dto.LastName,
             Email = dto.Email,
             PasswordHash = PasswordHasher.HashPassword(dto.Password),
-            Role = "Staff", // Kayıt olan kişi artık Customer değil Staff
-            CompanyId = newCompany.Id // İşte kritik nokta burası!
+            Role = "Staff", // Kayıt olan kişi Staff
+            CompanyId = newCompany.Id 
         };
 
         await _unitOfWork.Users.AddAsync(user);
@@ -95,7 +95,7 @@ public class AuthService : IAuthService
         var existingUser = await _unitOfWork.Users.FindAsync(u => u.Email == dto.Email);
         if (existingUser.Any()) return ApiResponse<Guid>.ErrorResult("Email zaten kayıtlı.");
 
-        // 2. KULLANICIYI OLUŞTUR
+        // 2. Kullanıcıyı oluşturuyoruz ve şirket Id'sini atıyoruz
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -113,20 +113,20 @@ public class AuthService : IAuthService
         return ApiResponse<Guid>.SuccessResult(user.Id, "Şirket personeli kaydı başarılı.");
     }
 
-    // ECommerce.Infrastructure / Services / AuthService.cs
+   
 
     public async Task<ApiResponse<bool>> ChangePasswordAsync(ChangePasswordDto dto)
     {
         var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
         if (user == null) return ApiResponse<bool>.ErrorResult("Kullanıcı bulunamadı.");
 
-        // 1. Mevcut şifreyi doğrula (DB'deki Hash ile girilen şifreyi karşılaştır)
+        // 1. Mevcut şifreyi doğruluyrouz (DB'deki Hash ile girilen şifreyi karşılaştırıyoruz)
         if (!PasswordHasher.VerifyPassword(dto.CurrentPassword, user.PasswordHash))
         {
             return ApiResponse<bool>.ErrorResult("Mevcut şifreniz hatalı.");
         }
 
-        // 2. Yeni şifreyi hash'le ve kaydet
+        // 2. Yeni şifreyi hash'leyip ve kaydediyoruz
         user.PasswordHash = PasswordHasher.HashPassword(dto.NewPassword);
         user.UpdatedDate = DateTime.UtcNow;
 

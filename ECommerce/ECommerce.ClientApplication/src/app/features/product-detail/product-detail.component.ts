@@ -68,15 +68,12 @@ export class ProductDetailComponent implements OnInit {
       next: (data) => {
         this.product = data;
 
-        // --- YENİ EKLENEN: Resim Mantığı ---
-        // Ürün geldiği gibi ana resmi seçili yapıyoruz
+        
         this.selectedImage = this.product.imageUrl;
-
-        // Eğer backend'den gelen images listesi boşsa, ana resmi listeye ekleyelim ki galeri boş durmasın
         if (!this.product.images || this.product.images.length === 0) {
            this.product.images = [this.product.imageUrl];
         }
-        // ------------------------------------
+        
 
         // 2. Ürün geldikten sonra Yorumları Çek
         this.loadReviews(id);
@@ -104,13 +101,11 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  // --- YENİ EKLENEN: Resim Değiştirme ---
+  
   changeImage(img: string) {
     this.selectedImage = img;
   }
-  // --------------------------------------
-
-  // --- DÜZENLEME VE SİLME İŞLEMLERİ ---
+ 
 
   // Düzenleme Modunu Açan Fonksiyon
   openEditModal(review: Review) {

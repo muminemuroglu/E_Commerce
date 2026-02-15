@@ -15,16 +15,7 @@ public class CargoRepository : GenericRepository<Cargo>, ICargoRepository
         _context = context;
     }
 
-    /*public async Task<IEnumerable<Cargo>> GetAllWithDetailsAsync(Guid? companyId)
-{
-    return await _context.Cargoes
-        .Include(c => c.Order)                  // Kargonun bağlı olduğu siparişi getir
-            .ThenInclude(o => o.Customer)       // Siparişin bağlı olduğu müşteriyi getir
-                .ThenInclude(cust => cust.User) // Müşterinin isim bilgilerini (User tablosu) getir
-        .Where(c => !c.IsDeleted && (!companyId.HasValue || c.CompanyId == companyId.Value))
-        .AsNoTracking()
-        .ToListAsync();
-}*/
+    
     
     
 }

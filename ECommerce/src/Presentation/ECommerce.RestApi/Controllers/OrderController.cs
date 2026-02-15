@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize] // Sipariş işlemleri için giriş zorunlu
-//[ApiKey]    // X-Api-Key zorunlu
+//[ApiKey]   
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
@@ -25,7 +25,7 @@ public class OrderController : ControllerBase
         var companyIdStr = User.FindFirstValue("companyId");
         Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
 
-        // OrderService içinde yeni bir metot veya filtreleme ekleyelim
+
         var result = await _orderService.GetAllFilteredAsync(companyId, role ?? "");
         return Ok(result);
     }
@@ -59,17 +59,7 @@ public class OrderController : ControllerBase
         return Ok(result);
     }
 
-    /*
-        [HttpGet("ByCustomer/{customerId}")]
-        public async Task<IActionResult> GetByCustomer(Guid customerId)
-        {
-            var role = User.FindFirstValue(ClaimTypes.Role);
-            var companyIdStr = User.FindFirstValue("companyId");
-            Guid? companyId = string.IsNullOrEmpty(companyIdStr) ? null : Guid.Parse(companyIdStr);
 
-            var result = await _orderService.GetByCustomerIdAsync(customerId, companyId, role ?? "");
-            return Ok(result);
-        }*/
 
     [HttpGet("ByCustomer/{customerId}")]
     public async Task<IActionResult> GetByCustomer(Guid customerId)

@@ -17,7 +17,7 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost("Login")] //async de hata olursa hocanın yaptığına bak
+    [HttpPost("Login")]
     public async Task<IActionResult> Login(LoginDto userLogindto)
     {
         var authResponseDto = await _authService.LoginAsync(userLogindto);
@@ -46,7 +46,7 @@ public class AuthController : ControllerBase
     [HttpPost("ChangePassword")]
     public async Task<IActionResult> ChangePassword(ChangePasswordDto dto)
     {
-        // Token'daki kullanıcı ID'si ile DTO'daki ID'nin eşleştiğinden emin olalım (Güvenlik)
+
         var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         if (dto.UserId != currentUserId) return Forbid();
 
@@ -54,15 +54,14 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-      [HttpPost("RegisterCustomer")]
-      [AllowAnonymous]
+    [HttpPost("RegisterCustomer")]
+    [AllowAnonymous]
     public async Task<IActionResult> RegisterCustomer(RegisterDto dto)
     {
-        // RegisterForCompanyAsync yerine yeni bir metod yazıyoruz
         var result = await _authService.RegisterCustomerAsync(dto);
         return Ok(result);
     }
 
-    
+
 
 }

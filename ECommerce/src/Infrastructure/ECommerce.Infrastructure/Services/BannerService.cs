@@ -4,8 +4,8 @@ using ECommerce.Application.Interfaces;
 using ECommerce.Application.Responses;
 using ECommerce.Domain.Entities;
 using ECommerce.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore; // ToListAsync için gerekli (Eğer EF Core kullanıyorsan)
-using System.Linq; // OrderBy ve filtreleme için
+using Microsoft.EntityFrameworkCore; 
+using System.Linq; 
 
 namespace ECommerce.Infrastructure.Services;
 public class BannerService : IBannerService
@@ -20,10 +20,10 @@ public class BannerService : IBannerService
 
     public async Task<ApiResponse<IEnumerable<BannerDto>>> GetAllAsync(Guid? companyId, string? role)
     {
-        // 1. Önce tüm bannerları çekelim (veya IsDeleted kontrolü ile)
+        // 1. Önce tüm bannerları çekiyorız (veya IsDeleted kontrolü ile)
         var allBanners = await _unitOfWork.Banners.GetAllAsync();
 
-        // 2. IQueryable yerine veriyi bellek üzerinde (In-Memory) filtreleyelim (Hataları önlemek için)
+        // 2. IQueryable yerine veriyi bellek üzerinde (In-Memory) filtreleyeliyoruz (Hataları önlemek için)
         var query = allBanners.Where(b => !b.IsDeleted && b.Status);
 
         var result = query.OrderBy(b => b.Order).ToList();

@@ -9,13 +9,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error) => {
       if (error) {
-        // 404: API bulunamadı
+        
         if (error.status === 404) {
           router.navigate(['/notfound']);
         }
         
-        // 500: Sunucu Hatası
-        // 0: Sunucuya Hiç Ulaşılamıyor (Backend Kapalı)
+       
         if (error.status === 500 || error.status === 0) {
           router.navigate(['/server-error']);
         }

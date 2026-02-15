@@ -16,11 +16,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Serilog Yapılandırması
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console() // Konsola yaz
+    .WriteTo.Console()
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day) // Günlük dosya oluştur
     .CreateLogger();
 
-builder.Host.UseSerilog(); // Default logger yerine Serilog kullan
+builder.Host.UseSerilog(); // Default logger yerine Serilog kullanıyoruz
 
 
 
@@ -93,8 +93,8 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<AppDbContext>();
         // Veritabanı yoksa oluştur (Migration varsa MigrateAsync kullanmak daha iyidir)
-        await context.Database.MigrateAsync(); 
-        
+        await context.Database.MigrateAsync();
+
         // Verileri ekle
         await ECommerce.Infrastructure.Data.SeedData.InitializeAsync(context);
     }

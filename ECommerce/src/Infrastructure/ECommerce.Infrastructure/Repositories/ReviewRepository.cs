@@ -4,7 +4,7 @@ using ECommerce.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace ECommerce.Infrastructure.Repositories;  // Buraya Product'a özel (Join'li sorgular vb.) metodlar gelecek.
+namespace ECommerce.Infrastructure.Repositories;  
 
 public class ReviewRepository : GenericRepository<Review>, IReviewRepository
 {

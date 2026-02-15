@@ -1,3 +1,4 @@
+
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,9 +7,10 @@ namespace ECommerce.Application.DTOs.Company
     public class CompanyApiKeyDto
     {
         public Guid CompanyId { get; set; }
+
+        [Required(ErrorMessage = "API Key is required.")]
         public string ApiKey { get; set; } = string.Empty;
     }
-
     public class CompanyRegenerateApiKeyDto
     {
         [Required]

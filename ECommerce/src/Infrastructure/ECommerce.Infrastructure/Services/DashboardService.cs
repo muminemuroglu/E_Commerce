@@ -57,7 +57,7 @@ public class DashboardService : IDashboardService
         stats.MonthlyTotalSales = monthlyOrders.Sum(o => o.TotalAmount);
 
         // 5. En Çok Satan 5 Ürün (GroupBy Mantığı)
-        // Not: Bu metodun çalışması için OrderRepository içinde GetAllWithItemsAsync tanımlı olmalıdır.
+       
         var ordersWithItems = await _unitOfWork.Orders.GetAllWithItemsAsync(companyId);
 
         if (ordersWithItems != null)

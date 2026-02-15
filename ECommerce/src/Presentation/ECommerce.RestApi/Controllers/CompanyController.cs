@@ -17,7 +17,7 @@ public class CompanyController : ControllerBase
         _companyService = companyService;
     }
 
-    // Herkes şirket listesini görebilir mi? (Yönergeye göre Admin görebilmeli)
+
     [HttpGet("List")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll()
@@ -39,10 +39,10 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> GetById(Guid id)
     {
         // Güvenlik: Manager ise sadece kendi ID'sini isteyebilir
-    if (User.IsInRole("CompanyManager") && id.ToString() != User.FindFirstValue("companyId"))
-        return Forbid();
+        if (User.IsInRole("CompanyManager") && id.ToString() != User.FindFirstValue("companyId"))
+            return Forbid();
 
-    return Ok(await _companyService.GetByIdAsync(id));
+        return Ok(await _companyService.GetByIdAsync(id));
     }
 
     [HttpPut("Update/{id}")]
@@ -55,7 +55,7 @@ public class CompanyController : ControllerBase
             var userCompanyId = User.FindFirstValue("companyId");
             if (id.ToString() != userCompanyId) return Forbid();
         }
-        
+
         return Ok(await _companyService.UpdateAsync(id, dto));
     }
 
@@ -79,4 +79,4 @@ public class CompanyController : ControllerBase
 }
 
 
-//Silme işleminin (Soft Delete) başarılı olması çok iyi. Veritabanına gidip baktığında IsDeleted alanının 1 (true) olduğunu, ancak verinin hala orada durduğunu görebilirsin. Bu, e-ticaret sistemlerinde veri kaybını önlemek için profesyonel bir yaklaşımdır.
+//Silme işleminin (Soft Delete) ;veritabanına gidip baktığımızda IsDeleted alanının 1 (true) olduğunu, ancak verinin hala orada durduğunu görebiliriz. Bu, e-ticaret sistemlerinde veri kaybını önlemek için profesyonel bir yaklaşımdır.

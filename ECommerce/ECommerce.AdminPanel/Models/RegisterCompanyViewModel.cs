@@ -33,7 +33,7 @@ public class RegisterCompanyViewModel
     [Required(ErrorMessage = "Vergi dairesi zorunludur.")]
     public string TaxOffice { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Telefon numarası zorunludur.")]//Bunu ekledim!!
+    [Required(ErrorMessage = "Telefon numarası zorunludur.")]
     public string Phone { get; set; } = string.Empty;
 
     // Adres Bilgileri

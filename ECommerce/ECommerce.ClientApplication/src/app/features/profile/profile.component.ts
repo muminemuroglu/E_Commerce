@@ -10,27 +10,26 @@ import { AuthService } from '../../core/services/auth-service.service';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-
   // DTO ile uyumlu model
   user = {
     firstName: '',
     lastName: '',
     email: '',
-    phone: '', // Backend DTO'da Phone
+    phone: '',
     address: '',
     city: '',
-    birthDate: '', // Bu Backend DTO'da yoksa eklenmeli veya UI'da pasif kalmalı
-    gender: '',    // Bu Backend DTO'da yoksa eklenmeli
-    marketingConsent: false
+    birthDate: '',
+    gender: '',
+    marketingConsent: false,
   };
 
   constructor(
     public authService: AuthService,
-    private customerService: CustomerService // Ekle
-  ) { }
+    private customerService: CustomerService,
+  ) {}
 
   ngOnInit(): void {
     this.loadProfile();
@@ -40,7 +39,6 @@ export class ProfileComponent implements OnInit {
     this.customerService.getProfile().subscribe({
       next: (data) => {
         if (data) {
-          // Backend'den gelen verileri forma eşle
           this.user.firstName = data.firstName;
           this.user.lastName = data.lastName;
           this.user.email = data.email;
@@ -49,47 +47,41 @@ export class ProfileComponent implements OnInit {
           this.user.city = data.city || '';
         }
       },
-      error: (err) => console.error("Profil yüklenemedi", err)
+      error: (err) => console.error('Profil yüklenemedi', err),
     });
   }
 
   onSave() {
-    // Backend'in beklediği DTO formatı
     const updateDto = {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
       phone: this.user.phone || '',
       address: this.user.address || '',
-      city: this.user.city || 'Belirtilmemiş', // Şehir boş gitmesin
-      // UserId'yi göndermiyoruz, Backend token'dan alacak
+      city: this.user.city || 'Belirtilmemiş', //
     };
-    console.log("Gönderilen DTO:", updateDto); // Konsoldan kontrol etmek için yazıldı
-
+    console.log('Gönderilen DTO:', updateDto); //
     this.customerService.updateProfile(updateDto).subscribe({
       next: (res) => {
-        if (res.success) 
-          {
-            alert("Bilgileriniz başarıyla güncellendi!");
-          } else {
-          // Eğer backend success:false dönüyorsa mesajı göster
-          alert(res?.message || "İşlem başarısız.");
+        if (res.success) {
+          alert('Bilgileriniz başarıyla güncellendi!');
+        } else {
+          alert(res?.message || 'İşlem başarısız.');
         }
       },
       error: (err) => {
         console.error(err);
         // Hatanın detayını görmek için:
         if (err.error && err.error.errors) {
-          // Backend validasyon hatalarını (Hangi alan eksik?) alert ile göster
+          // Backend validasyon hatalarını (Hangi alan eksik?) alert ile gösteriyoruz
           const validationErrors = JSON.stringify(err.error.errors);
-          alert("Hata: " + validationErrors);
+          alert('Hata: ' + validationErrors);
         } else {
-          alert("Güncelleme sırasında hata oluştu.");
+          alert('Güncelleme sırasında hata oluştu.');
         }
-      }
+      },
     });
   }
-  
 
   onLogout() {
     this.authService.logout();

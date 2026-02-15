@@ -27,7 +27,7 @@ export class CartService {
   totalPrice = computed(() => this.cartItems().reduce((acc, item) => acc + (item.product.price * item.quantity), 0));
 
   constructor() {
-    // Uygulama açılınca localStorage'dan sepeti geri yükle
+    // Uygulama açılınca localStorage'dan sepeti geri yüklüyoruz
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       this.cartItems.set(JSON.parse(storedCart));

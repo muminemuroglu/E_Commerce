@@ -54,8 +54,7 @@ export class ProductService {
     params = params.append('PageNumber', filter.pageNumber || 1);
     params = params.append('PageSize', filter.pageSize || 12);
 
-    // BaseService genellikle URL string alır. Params'ı stringe çevirip ekliyoruz.
-    // Eğer BaseService'in params desteği varsa onu da kullanabilirsin ama bu yöntem garanti çalışır.
+  
     const queryString = params.toString();
 
     return this.baseService.get<ApiResponse<ProductListResponse>>(`Product/Filter?${queryString}`).pipe(

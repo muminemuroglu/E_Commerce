@@ -9,7 +9,7 @@ public class ProductDto
     [Required(ErrorMessage = "Ürün adı zorunludur.")]
     [MaxLength(150)]
     public string Name { get; set; } = string.Empty;    
-    // Rich Text HTML
+
     [Required(ErrorMessage = "Ürün açıklaması zorunludur.")]
     [MaxLength(200, ErrorMessage = "Açıklama en fazla 200 karakter olabilir.")]
     public string Description { get; set; } = string.Empty;

@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     addToCart(product: Product) {
         if (product) {
             this.cartService.addToCart(product);
-            alert("Ürün sepete eklendi!"); // Şimdilik basit alert, sonra Toast ekleriz
+            alert("Ürün sepete eklendi!"); // 
         }
     }
 
@@ -96,12 +96,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 carousel.cycle(); // Manuel olarak döngüyü başlat
             }
             this.cdr.detectChanges();
-        }, 300); // Süreyi biraz artırdık ki DOM tam yerleşsin
+        }, 300); 
     }
 
     ngAfterViewInit(): void { }
     // Dummy Marka Logoları (Gerçek logolar yerine placeholder veya CDN linkleri kullanılabilir)
-    // Şimdilik temsili logolar kullanıyorum.
+    // Şimdilik temsili logolar kullanıyoruz.
     brands = [
         { name: 'Apple', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg' },
         { name: 'Samsung', logo: 'https://cdn.worldvectorlogo.com/logos/samsung-8.svg' },

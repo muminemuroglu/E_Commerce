@@ -9,13 +9,14 @@ using System.Security.Claims;
 
 namespace ECommerce.AdminPanel.Controllers;
 
-// AdminPanel / Controllers / CompanyController.cs
+
 [Authorize]
 public class CompanyController : Controller
 {
     private readonly BaseApiService _apiService;
     public CompanyController(BaseApiService apiService) => _apiService = apiService;
 
+// ŞİRKET LİSTESİ
     public async Task<IActionResult> Index()
     {
         // Eğer Manager ise listeyi görmesine gerek yok, direkt kendi şirketine gitsin
@@ -30,6 +31,7 @@ public class CompanyController : Controller
         return View(response?.Data ?? new List<CompanyDto>());
     }
 
+//ŞİRKET GÜNCELLEME
     [HttpGet]
     public async Task<IActionResult> Update(Guid id)
     {
@@ -43,7 +45,7 @@ public class CompanyController : Controller
         var model = new CompanyUpdateViewModel {
             Id = response.Data.Id,
             Name = response.Data.Name,
-            TaxNumber = response.Data.TaxNumber, // Readonly olacak
+            TaxNumber = response.Data.TaxNumber, 
             Phone = response.Data.Phone,
             FullAddress = response.Data.FullAddress,
             Status = response.Data.Status,

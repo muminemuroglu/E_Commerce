@@ -10,11 +10,11 @@ public class ProductUpdateDto
     public string Name { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Ürün açıklaması zorunludur.")]
-    public string Description { get; set; } = string.Empty; // Yönergedeki Rich Text HTML gelecek
+    public string Description { get; set; } = string.Empty; 
 
     [Required(ErrorMessage = "Fiyat zorunludur.")]
     [Range(0.01, double.MaxValue, ErrorMessage = "Fiyat 0'dan büyük olmalıdır.")]
-    public decimal Price { get; set; } //Fiyat gereksinimleri dahil edildi
+    public decimal Price { get; set; } 
 
     [Required(ErrorMessage = "Stok adedi zorunludur.")]
     [Range(0, int.MaxValue, ErrorMessage = "Stok negatif olamaz.")]

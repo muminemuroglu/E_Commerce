@@ -11,7 +11,7 @@ namespace ECommerce.RestApi.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 //[ApiKey] // X-Api-Key Header'ı zorunlu
-[Authorize] // Geçerli JWT Token zorunlu
+[Authorize]
 public class BrandController : ControllerBase
 {
     private readonly IBrandService _brandService;
@@ -21,16 +21,9 @@ public class BrandController : ControllerBase
         _brandService = brandService;
     }
 
-    /*[HttpGet("List")]
-    [AllowAnonymous] // Markaları herkes görebilsin (Katalog amaçlı)
-    public async Task<IActionResult> GetAll()
-    {
-        var result = await _brandService.GetAllAsync();
-        return Ok(result);
-    }*/
 
     [HttpGet("List")]
-    [AllowAnonymous] // Markaları herkes görebilsin (Katalog amaçlı)
+    [AllowAnonymous] // Markaları herkes görebilsin
     public async Task<IActionResult> GetAll()
 
     {

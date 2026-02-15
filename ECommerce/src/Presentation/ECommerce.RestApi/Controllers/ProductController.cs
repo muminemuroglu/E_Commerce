@@ -31,17 +31,17 @@ public class ProductController : ControllerBase
     [HttpGet("List")]
     public async Task<IActionResult> GetAll()
     {
-        // 1. Kullanıcının rolünü alalım
+        // 1. Kullanıcının rolünü alıyoruz
         var userRole = User.FindFirstValue(ClaimTypes.Role);
 
-        // 2. Eğer kullanıcı Admin ise tüm ürünleri getir
+        // 2. Eğer kullanıcı Admin ise tüm ürünleri getiriyoruz
         if (userRole == "Admin")
         {
             var result = await _productService.GetAllAsync();
             return Ok(result);
         }
 
-        // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtrele
+        // 3. Eğer CompanyManager ise Token içindeki CompanyId'ye göre filtreliyoruz
         var companyIdStr = User.FindFirstValue("companyId");
         if (Guid.TryParse(companyIdStr, out Guid companyId))
         {
@@ -49,7 +49,7 @@ public class ProductController : ControllerBase
             return Ok(result);
         }
 
-        // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebilirsin
+        // 4. Giriş yapmamış veya yetkisiz biri ise boş liste veya hata dönebiliriz
         return Ok(ApiResponse<IEnumerable<ProductDto>>.SuccessResult(new List<ProductDto>()));
     }
 
@@ -63,7 +63,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("Search")]
-    [AllowAnonymous] // Arama yapmak için giriş zorunluluğu olmasın
+    [AllowAnonymous] // Arama yapmak için giriş zorunluluğu olmasın istiyoruz
     public async Task<IActionResult> Search([FromQuery] string keyword)
     {
         var result = await _productService.SearchAsync(keyword);
@@ -80,22 +80,22 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost("Create")]
-[Authorize(Roles = "Admin,CompanyManager")]
-// [FromBody] YERİNE [FromForm] KULLANIYORUZ
-public async Task<IActionResult> Create([FromForm] ProductCreateDto dto) 
-{
-    var result = await _productService.CreateAsync(dto);
-    return Ok(result);
-}
+    [Authorize(Roles = "Admin,CompanyManager")]
+
+    public async Task<IActionResult> Create([FromForm] ProductCreateDto dto)
+    {
+        var result = await _productService.CreateAsync(dto);
+        return Ok(result);
+    }
 
     [HttpPut("Update/{id}")]
-[Authorize(Roles = "Admin,CompanyManager")]
-[Authorize(Policy = "CompanyIsolation")]
-public async Task<IActionResult> Update(Guid id, [FromForm] ProductUpdateDto dto)
-{
-    var result = await _productService.UpdateAsync(id, dto);
-    return result.Success ? Ok(result) : BadRequest(result);
-}
+    [Authorize(Roles = "Admin,CompanyManager")]
+    [Authorize(Policy = "CompanyIsolation")]
+    public async Task<IActionResult> Update(Guid id, [FromForm] ProductUpdateDto dto)
+    {
+        var result = await _productService.UpdateAsync(id, dto);
+        return result.Success ? Ok(result) : BadRequest(result);
+    }
 
     [HttpDelete("Delete/{id}")]
     [Authorize(Roles = "Admin,CompanyManager")]

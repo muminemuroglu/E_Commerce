@@ -26,7 +26,7 @@ public class AuthController : Controller
     {
         if (!ModelState.IsValid) return View(model);
 
-        // API'ye gidiyoruz (Senin LoginDto yapına uygun gönderiyoruz)
+        // API'ye gidiyoruz (LoginDto yapısına uygun gönderiyoruz)
         var loginRequest = new { Email = model.EmailOrUserName, Password = model.Password };
         var response = await _apiService.PostAsync<object, string>("Auth/Login", loginRequest);
 
@@ -43,7 +43,7 @@ public class AuthController : Controller
             var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             
 
-            // 1. Session Set Et (Layout'taki @Context.Session.GetString kodları için)
+            // 1. Session Set Ediyoruz (Layout'taki @Context.Session.GetString kodları için)
             HttpContext.Session.SetString("UserName", userName);
             if (companyId != null) HttpContext.Session.SetString("companyId", companyId);
 
@@ -58,7 +58,7 @@ public class AuthController : Controller
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            // 3. API Token'ı Cookie'ye yaz (BaseApiService için)
+            // 3. API Token'ı Cookie'ye yazıyoruz (BaseApiService için)
             Response.Cookies.Append("JwtToken", token, new CookieOptions { HttpOnly = true });
 
             TempData["SuccessMessage"] = "Hoş geldiniz, giriş başarılı!";

@@ -11,7 +11,7 @@ namespace ECommerce.Application.DTOs.Request;
         public bool IsDeleted { get; set; } = true;
     }
 
-    // Admin cevap/çözüm DTO'su (opsiyonel ama pratik)
+    
     public class RequestResolveDto
     {
         [Required]

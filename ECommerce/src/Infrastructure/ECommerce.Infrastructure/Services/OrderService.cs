@@ -22,7 +22,7 @@ public class OrderService : IOrderService
 
     public async Task<ApiResponse<OrderDto>> GetByIdAsync(Guid id)
     {
-        // YENİ KOD: İlişkili verilerle birlikte çekiyoruz
+        // İlişkili verilerle birlikte çekiyoruz
         var order = await _unitOfWork.Orders.GetByIdWithDetailsAsync(id);
 
         if (order == null) return ApiResponse<OrderDto>.ErrorResult("Sipariş bulunamadı.");
@@ -60,7 +60,7 @@ public class OrderService : IOrderService
                 return ApiResponse<Guid>.ErrorResult($"{product?.Name ?? "Ürün"} için yetersiz stok!");
             }
 
-            // Fiyatı o anki güncel ürün fiyatından al (Güvenlik için önemli)
+            // Fiyatı o anki güncel ürün fiyatından alıyoruz (Güvenlik için önemli)
             item.Price = product.Price;
 
             // Ara toplamı genel toplama ekle: (Fiyat * Miktar)
@@ -86,31 +86,11 @@ public class OrderService : IOrderService
         return ApiResponse<bool>.SuccessResult(true, "Sipariş durumu güncellendi.");
     }
 
-    /*
-        public async Task<ApiResponse<IEnumerable<OrderDto>>> GetByCustomerIdAsync(Guid customerId, Guid? companyId, string? role)
-        {
-            // Admin ise companyId göndermiyoruz (null), manager ise gönderiyoruz
-            Guid? filterCompanyId = role == "Admin" ? null : companyId;
 
-            var orders = await _unitOfWork.Orders.GetByCustomerIdWithDetailsAsync(customerId, filterCompanyId);
-
-            // AutoMapper artık Order.Customer.User yolunu takip edip ismi doldurabilecek
-            var dtos = _mapper.Map<IEnumerable<OrderDto>>(orders);
-
-            return ApiResponse<IEnumerable<OrderDto>>.SuccessResult(dtos);
-        }*/
 
     public async Task<ApiResponse<IEnumerable<OrderDto>>> GetByCustomerIdAsync(Guid customerId, Guid? companyId, string? role)
     {
-        // ESKİ KOD (Hatalı Mantık):
-        // Admin ise companyId göndermiyoruz (null), manager ise gönderiyoruz
-        // Guid? filterCompanyId = role == "Admin" ? null : companyId;
-
-        // YENİ DÜZELTİLMİŞ MANTIK:
-        // Eğer istek atan kişi 'Customer' ise, CompanyId filtresi koyma (null yap).
-        // Çünkü müşteri her şirketten alışveriş yapmış olabilir.
-        // Eğer istek atan kişi 'CompanyManager' ise, sadece kendi şirketine düşen siparişleri görsün.
-
+    
         Guid? filterCompanyId = null;
 
         if (role == "CompanyManager" || role == "Admin") // Admin veya Şirket Yöneticisi ise

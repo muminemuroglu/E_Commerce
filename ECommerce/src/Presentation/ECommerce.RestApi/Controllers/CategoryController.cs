@@ -10,7 +10,7 @@ namespace ECommerce.RestApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-//[ApiKey] // Her istekte X-Api-Key zorunlu
+//[ApiKey] 
 public class CategoryController : ControllerBase
 {
     private readonly ICategoryService _categoryService;
@@ -28,7 +28,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet("List")]
-    [AllowAnonymous] // Kategorileri herkes görebilsin (Katalog amaçlı)
+    [AllowAnonymous] // Kategorileri herkes görebilsin 
     public async Task<IActionResult> GetAll()
 
     {

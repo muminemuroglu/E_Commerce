@@ -46,7 +46,7 @@ public class CustomerRepository : GenericRepository<Customer>, ICustomerReposito
     public async Task<Customer?> GetByIdWithUserAsync(Guid id)
     {
         return await _context.Customers
-            .Include(c => c.User) // ✅ İşte bu satır ismi getirir
+            .Include(c => c.User) //Bu satır ismi getirir
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 }

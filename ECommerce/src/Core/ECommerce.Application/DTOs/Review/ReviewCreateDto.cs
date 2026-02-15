@@ -1,3 +1,4 @@
+
 using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Application.DTOs.Review;
@@ -12,10 +13,9 @@ public class ReviewCreateDto
     [Range(1, 5, ErrorMessage = "Puan 1 ile 5 arasında olmalıdır.")]
     public int Rating { get; set; }
 
-    [Required]
+    [Required (ErrorMessage = "Product ID is required.")]
     public Guid ProductId { get; set; }
 
-     // API'de genelde token'dan alınır; yine de dto'da bırakıyorum
-    [Required]
+    [Required (ErrorMessage = "Customer ID is required.")]
     public Guid CustomerId { get; set; }
 }

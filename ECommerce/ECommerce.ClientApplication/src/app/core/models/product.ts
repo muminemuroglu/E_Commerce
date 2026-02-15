@@ -7,7 +7,7 @@ export interface Product {
   isFreeShipping: boolean;
   isFastDelivery: boolean;
   imageUrl: string; // Ana resim
-  images?: string[]; // YENİ: Diğer resimler (opsiyonel olabilir)
+  images?: string[]; //Diğer resimler (opsiyonel olabilir)
   stock: number;
   categoryId: string;
   companyId: string;
@@ -32,7 +32,7 @@ export interface ProductListResponse {
   maxPrice: number;
 }
 
-// YENİ: Filtreleme parametreleri (İsteği atarken kullanacağız)
+// Filtreleme parametreleri (İsteği atarken kullanacağız)
 export interface ProductFilterParams {
   categoryId?: string;
   brandIds?: string[]; // Çoklu marka seçimi için dizi
