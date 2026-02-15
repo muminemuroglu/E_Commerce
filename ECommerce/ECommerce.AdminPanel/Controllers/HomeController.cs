@@ -1,3 +1,4 @@
+
 using ECommerce.AdminPanel.Services;
 using ECommerce.Application.DTOs.Dashboard;
 using Microsoft.AspNetCore.Authorization;
@@ -9,12 +10,10 @@ namespace ECommerce.AdminPanel.Controllers;
 public class HomeController : Controller
 {
     private readonly BaseApiService _apiService;
-
     public HomeController(BaseApiService apiService)
     {
         _apiService = apiService;
     }
-
     public async Task<IActionResult> Index()
     {
         // API'den Dashboard istatistiklerini çekiyoruz

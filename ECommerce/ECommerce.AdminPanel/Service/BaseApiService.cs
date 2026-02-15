@@ -19,7 +19,7 @@ public class BaseApiService
         _httpContextAccessor = httpContextAccessor;
         _jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        // CS8604 Çözümü: Null kontrolü ekliyoruz veya varsayılan değer veriyoruz
+        // Null kontrolü ekliyoruz veya varsayılan değer veriyoruz
         var baseUrl = _configuration["ApiSettings:BaseUrl"] ?? "https://localhost:5271/api/";
         _httpClient.BaseAddress = new Uri(baseUrl);
 
@@ -33,13 +33,9 @@ public class BaseApiService
         if (!string.IsNullOrEmpty(token))
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
         }
     }
-
-    // CS8603 Çözümü: Geri dönüş tipini '?' ile nullable yaparak veya null gelirse yeni nesne dönerek çözüyoruz
-    
-
-
 
     public async Task<ApiResponse<T>?> GetAsync<T>(string endpoint)
     {
@@ -144,7 +140,7 @@ public class BaseApiService
 
 /*
 
-NOTLAR: 
+notlar: 
 1. HttpClient Nedir?
    - HttpClient, başka bir sunucuya HTTP isteği atmanı sağlar. MVC → API çağrısı gibi.
 
