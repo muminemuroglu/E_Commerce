@@ -229,3 +229,11 @@
 /Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/obj/Debug/net9.0/ECommerce.AdminPanel.genruntimeconfig.cache
 /Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/obj/Debug/net9.0/ref/ECommerce.AdminPanel.dll
 /Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/obj/Debug/net9.0/compressed/jddxkiyi22-72l5k6hu8b.gz
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/ClosedXML.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/ClosedXML.Parser.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/DocumentFormat.OpenXml.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/DocumentFormat.OpenXml.Framework.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/ExcelNumberFormat.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/RBush.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/SixLabors.Fonts.dll
+/Users/muminemuroglu/Documents/E_Commerce/ECommerce/ECommerce.AdminPanel/bin/Debug/net9.0/System.IO.Packaging.dll

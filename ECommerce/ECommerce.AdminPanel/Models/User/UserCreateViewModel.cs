@@ -1,11 +1,10 @@
+
 using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.AdminPanel.Models.User;
 
 public class UserCreateViewModel
 {
-    
-
     [Required(ErrorMessage = "Ad zorunludur.")]
     [Display(Name = "Ad")]
     public string FirstName { get; set; } = string.Empty;

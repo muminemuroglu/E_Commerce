@@ -1,3 +1,4 @@
+
 namespace ECommerce.AdminPanel.Models.User;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,6 +19,5 @@ public class UserProfileViewModel
     [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi giriniz.")]
     public string Email { get; set; } = string.Empty;
 
-    public string Role { get; set; } = string.Empty;
-    public string? CompanyName { get; set; }
+    public string Role { get; set; } = string.Empty; // Rol değiştirilemez, sadece gösterilir
 }
